@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html class="gr__brian_io">
+
+<html>
   
   <head>
 
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> brian sayre</title>
 
-    <title>👨‍💻 brian sayre</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
 
     <style>
 
@@ -14,6 +18,8 @@
         margin: 0;
         height: 100vh;
         position: relative;
+        font-size: 1.1em;
+        background-color: #181818;
       }
 
       nav {
@@ -23,46 +29,108 @@
         left: 50%;
         -ms-transform: translate(-50%, -75%);
         transform: translate(-50%, -75%);
-        width: 200px; 
+        width: 250px; 
         list-style: none;
         text-align: center;
       }
 
-      a {
+      .light-mode-a {
         display: block;
         text-decoration: none;
-        color: blue;
+        color: #0a244d;
       }
 
-      p {
+      .dark-mode-a {
+        display: block;
+        text-decoration: none;
+        color: #8cabd9;
+      }
+
+      .light-mode-p {
+        color: #FF1564;
         margin: 20px 0 0 0;
         font-style: oblique;
       }
 
+      .dark-mode-p {
+        color: #286EB3;
+        margin: 20px 0 0 0;
+        font-style: oblique;
+      }
+
+      #toggle {
+        cursor: pointer;
+      }
+
+      #bottom-div {
+        display: inline-block;
+        position: absolute;
+        margin-left: auto;
+        margin-right: auto;
+        bottom: 20px;
+        width: 100%;
+        text-align: center;
+      }
+
     </style>
 
-    <style>
-      @media print {#ghostery-purple-box {display:none !important}}
-    </style>
+    <script>
+
+      function toggleDarkMode() {
+
+        aElements = document.getElementsByTagName('a');
+        newAClass = ""
+        pElements = document.getElementsByTagName('p');
+        newPClass = ""
+        
+        if (document.getElementById('toggle').className == "dark-mode-p") {
+          newAClass = "light-mode-a"
+          newPClass = "light-mode-p"
+          document.body.style.backgroundColor = "white";
+          document.getElementById('toggle').innerHTML = "🌘 dark mode"
+        } else {
+          newAClass = "dark-mode-a"
+          newPClass = "dark-mode-p"
+          document.body.style.backgroundColor = "#181818";
+          document.getElementById('toggle').innerHTML = "🌔 light mode"
+        }
+
+        for (var i = 0; i < aElements.length; i++) {
+          aElements[i].setAttribute("class", newAClass);
+        }
+        for (var j = 0; j < pElements.length; j++) {
+          pElements[j].setAttribute("class", newPClass);
+        }
+
+      }
+
+    </script>
 
   </head>
 
-  <body data-gr-c-s-loaded="true">
+  <body>
 
     <nav>
-      <p> brian sayre </p>
-      <br />
-      <a target="_blank" href="https://github.com/briansayre">🐙 github</a>
-      <a target="_blank" href="https://github.com/briansayre/resume/blob/master/resume.pdf">📋 resume</a>
-      <a target="_blank" href="https://www.linkedin.com/in/brian-sayre">🔗 linkedin</a>
 
-      <p> projects </p>
-      <a target="_blank" href="https://bit.ly/simplmeals">🍽️ simplmeals</a>
+      <p class="dark-mode-p">brian sayre</p>
+      <br>
+      <a class="dark-mode-a" target="_blank" href="https://github.com/briansayre">🐙 github</a>
+      <a class="dark-mode-a" target="_blank" href="https://drive.google.com/file/d/1rT13RD-V-CCwf-dJDNSH35MbyVhwgF0T/view?usp=sharing">📋 resume</a>
+      <a class="dark-mode-a" target="_blank" href="https://www.linkedin.com/in/brian-sayre">🔗 linkedin</a>
 
-      <p> contact </p>
-      <a >📨 bsayre@iastate.edu</a>
-      <a >📱 (319)-804-5234</a>
+      <p class="dark-mode-p"> projects </p>
+      <a class="dark-mode-a" target="_blank" href="https://simplmeals.com">🍽️ simplmeals</a>
+
+      <p class="dark-mode-p"> contacts </p>
+      <a class="dark-mode-a" >📨 bsayre@iastate.edu</a>
+      <a class="dark-mode-a" >📱 (319)-804-5234</a>
+      <br>
+
     </nav>
+
+    <div id="bottom-div">
+      <p class="dark-mode-p" id="toggle" onClick="toggleDarkMode()"> 🌔 light mode </p>
+    </div>
 
   </body>
 
