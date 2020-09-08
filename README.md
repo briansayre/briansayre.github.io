@@ -1,4 +1,4 @@
-[briansayre.com](briansayre.com)
+[briansayre.com](https://briansayre.com)
 
 
   <p class="dark-mode-p">brian sayre</p>
