@@ -1,136 +1,198 @@
-<!DOCTYPE html>
-
 <html>
-  
-  <head>
 
-    <title> brian sayre</title>
+<head>
 
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    
-    <style>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-      body {
-        margin: 0;
-        height: 100vh;
-        position: relative;
-        font-size: 1.1em;
-        background-color: #181818;
-      }
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link rel="stylesheet" href="css/styles.css">
 
-      nav {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -ms-transform: translate(-50%, -75%);
-        transform: translate(-50%, -75%);
-        width: 300px; 
-        list-style: none;
-        text-align: center;
-      }
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-      .light-mode-a {
-        display: block;
-        text-decoration: none;
-        color: #0a244d;
-      }
-
-      .dark-mode-a {
-        display: block;
-        text-decoration: none;
-        color: #8cabd9;
-      }
-
-      .light-mode-p {
-        color: #FF1564;
-        margin: 20px 0 0 0;
-        font-style: oblique;
-      }
-
-      .dark-mode-p {
-        color: #eee;
-        margin: 20px 0 0 0;
-        font-style: oblique;
-      }
-
-      #toggle {
-        cursor: pointer;
-        font-style: normal;
-      }
-
-      #bottom-div {
-        display: inline-block;
-        position: absolute;
-        margin-left: auto;
-        margin-right: auto;
-        bottom: 20px;
-        width: 100%;
-        text-align: center;
-      }
-
-    </style>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script>
+        $(document).ready(function () {
 
-      function toggleDarkMode() {
+            $(document).ready(function () {
+                $('.collapsible').collapsible({
+                    accordion: true
+                });
 
-        aElements = document.getElementsByTagName('a');
-        newAClass = ""
-        pElements = document.getElementsByTagName('p');
-        newPClass = ""
-        
-        if (document.getElementById('toggle').className == "dark-mode-p") {
-          newAClass = "light-mode-a"
-          newPClass = "light-mode-p"
-          document.body.style.backgroundColor = "white";
-          document.getElementById('toggle').innerHTML = "🌘 dark mode"
-        } else {
-          newAClass = "dark-mode-a"
-          newPClass = "dark-mode-p"
-          document.body.style.backgroundColor = "#181818";
-          document.getElementById('toggle').innerHTML = "🌔 light mode"
-        }
+            });
 
-        for (var i = 0; i < aElements.length; i++) {
-          aElements[i].setAttribute("class", newAClass);
-        }
-        for (var j = 0; j < pElements.length; j++) {
-          pElements[j].setAttribute("class", newPClass);
-        }
+            $.ajax({
+                url: "https://api.github.com/users/briansayre/starred",
+                type: 'GET',
+                success: function(res) {
+                    console.log(res);
+                    $.each(res, function (index, repo) {
+                        if (repo.homepage == "") {
+                            repo.homepage = "https://github.com/briansayre"
+                        }
+                        $('#ajax').append(
+                            '<div class="col">' + '\n' + 
+                                '<div class="card grey lighten-5">' + '\n' + 
+                                    '<div class="card-content black-text">' + '\n' + 
+                                        '<span><b>' + repo.name + '</b></span><br>' + '\n' + 
+                                        '<i><span>' + repo.language + '</span></i>' + '\n' + 
+                                        '<p>' + repo.description + '</p>' + '\n' + 
+                                    '</div>' + '\n' + 
+                                    '<div class="card-action">' + '\n' + 
+                                        '<a class="waves-effect grey darken-4 btn-small" target="_blank"' + '\n' + 
+                                            'href="' + repo.html_url + '"><i' + '\n' + 
+                                                'class="material-icons left">code</i>Code</a>' + '\n' + 
+                                        '<a class="waves-effect grey darken-4 btn-small" target="_blank"' + '\n' + 
+                                            'href="' + repo.homepage + '"><i class="material-icons left">public</i>App</a>' + '\n' + 
+                                    '</div>' + '\n' + 
+                                '</div>' + '\n' + 
+                            '</div>' + '\n'
+                        );
+                    })
+                }
+            });
 
-      }
+            $.ajax({
+                url: "https://api.github.com/users/briansayre",
+                type: 'GET',
+                success: function(res) {
+                    console.log(res);
+                    $('#pic').append(
+                        '<img class="z-depth-2 circle" height="200px" src="' + res.avatar_url+ '" />'
+                    );
+                }
+            });
 
+        });
     </script>
 
-  </head>
+    <title> Brian Sayre </title>
+</head>
 
-  <body>
+<body>
 
-    <nav>
+    <div class="container">
 
-      <p class="dark-mode-p">brian sayre</p>
-      <br>
-      <a class="dark-mode-a" target="_blank" href="https://github.com/briansayre">🐙 github</a>
-      <a class="dark-mode-a" target="_blank" href="https://github.com/briansayre/resume/blob/master/resume.pdf">📋 resume</a>
-      <a class="dark-mode-a" target="_blank" href="https://www.linkedin.com/in/brian-sayre">🔗 linkedin</a>
+        <br><br>
 
-      <p class="dark-mode-p"> projects </p>
-      <a class="dark-mode-a" target="_blank" href="https://github.com/briansayre/briansayre">📝 self-updating readme</a>
-      <a class="dark-mode-a" target="_blank" href="https://bit.ly/simplmeals">🍽️ simplmeals</a>
-      <a class="dark-mode-a" target="_blank" href="https://github.com/briansayre/RGB-LED-Light-Box">💡 rgb led light box</a>
+        <span class="row">
+            <span class="col s12 center" id="pic">
+            </span>
+        </span>
 
-      <p class="dark-mode-p"> contacts </p>
-      <a class="dark-mode-a" >📨 bsayre@iastate.edu</a>
-      <a class="dark-mode-a" >📱 (319)-804-5234</a>
-      <br>
+        <span class="row">
+            <span class="col s12 center">
+                <h2 class="center"> Brian Sayre </h2>
+            </span>
+            <h6 class="center"> software engineering student</h6>
+        </span>
 
-    </nav>
+        <br>
 
-    <div id="bottom-div">
-      <p class="dark-mode-p" id="toggle" onClick="toggleDarkMode()"> 🌔 light mode </p>
+        <ul class="collapsible">
+
+            <li class="active">
+                <div class="collapsible-header"><i class="material-icons">link</i>Links</div>
+                <div class="collapsible-body">
+                    <span class="row">
+                        <span class="col s4 m4 center">
+                            <a class="waves-effect grey darken-4 btn-small" href="https://github.com/briansayre" target="_blank"><i class="material-icons left">code</i>GitHub</a>
+                        </span>
+                        <span class="col s4 m4 center">
+                            <a class="waves-effect grey darken-4 btn-small" href="https://www.linkedin.com/in/brian-sayre" target="_blank"><i class="material-icons left">people_outline</i>LinkedIn</a>
+                        </span>
+                        <span class="col s4 m4 center">
+                            <a class="waves-effect grey darken-4 btn-small" href="https://github.com/briansayre/resume/blob/master/resume.pdf" target="_blank"><i class="material-icons left">content_paste</i>Resume</a>
+                        
+                        </span>
+                    </span>
+                </div>
+            </li>
+
+            <li class="">
+                <div class="collapsible-header"><i class="material-icons">work_outline</i>Experience</div>
+                <div class="collapsible-body">
+
+                    <div class="col">
+                        <div class="card grey lighten-5">
+                            <div class="card-content black-text">
+                                <span><b>Software Engineer Intern</b></span><br>
+                                <span>Principal Financial Group, Des Moines, Iowa</span><br>
+                                <i><span>May 2020 - August 2020</span></i>
+                                <ul class="indent">
+                                    <li>- Created a proof-of-concept for an internal chatbot for Principal's employees
+                                        to use</li>
+                                    <li>- Developed using the AWS Cloud Development Kit written in Python</li>
+                                    <li>- Worked with a team of six interns practicing Scrum agile development</li>
+                                    <li>- Winner of PFG Summer Code Jam/Hackathon out of 15 other intern teams</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="card grey lighten-5">
+                            <div class="card-content black-text">
+                                <span><b>Software Engineering Learning Community Peer Mentor</b></span><br>
+                                <span>Iowa State University, Ames, Iowa</span><br>
+                                <i><span>August 2019 - Present</span></i>
+                                <ul class="indent">
+                                    <li>- Host office hours and labs for an introduction to C programming course for
+                                        freshman in the fall</li>
+                                    <li>- Teach a project-based software course for freshman in the spring</li>
+                                    <li>- Facilitate study groups, workshops, and social events for the learning
+                                        community</li>
+                                    <li>- Assist with questions about ISU, transitioning to college life, and the
+                                        Software Engineering major</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </li>
+            <li class="">
+                <div class="collapsible-header"><i class="material-icons">code</i>Projects</div>
+                <div class="collapsible-body projects">
+
+                    <div id="ajax"></div>
+
+                </div>
+            </li>
+            <li class="">
+                <div class="collapsible-header"><i class="material-icons">chat_bubble_outline</i>Contact</div>
+                <div class="collapsible-body">
+
+                    <span class="row">
+                        <span class="col s6 m6 center">
+                            <i class="material-icons">mail_outline</i>
+                        </span>
+                        <span class="col s6 m6 center">
+                            <i class="material-icons">stay_current_portrait</i>
+                        </span>
+                    </span>
+
+                    <span class="row">
+                        <span class="col s6 m6 center">
+                            <p> bsayre@iastate.edu</p>
+                        </span>
+                        <span class="col s6 m6 center">
+                            <p> (319)-804-5234</p>
+                        </span>
+                    </span>
+
+                </div>
+            </li>
+        </ul>
+
     </div>
 
-  </body>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    
+</body>
 
 </html>
