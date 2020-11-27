@@ -3,11 +3,36 @@
 }
 
 img {
-    border: 1px solid #212121;
-    border-style: inset;
+    border: 2px solid #4DB6AC;
+    border-style: solid;
 }
 
 .btn-small {
     width: 130px;
     margin: 5px 0;
+}
+
+body {
+    background-color: #121212;
+}
+
+.collapsible-header {
+    border-bottom: 1px solid #121212;
+    background-color: #2B2B2B;
+}
+
+.collapsible-body {
+    border: 0px solid black;
+    border-bottom: 1px solid #121212;
+    background-color: #313131;
+}
+
+.collapsible {
+    border: 0px solid black;
+    background-color: #121212;
+}
+
+.card {
+    background-color: #373737;
+    color: white;
 }

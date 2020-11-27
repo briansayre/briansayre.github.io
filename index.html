@@ -18,6 +18,17 @@
     <script>
         $(document).ready(function () {
 
+            $.ajax({
+                url: "https://api.github.com/users/briansayre",
+                type: 'GET',
+                success: function(res) {
+                    console.log(res);
+                    $('#pic').append(
+                        '<img class="z-depth-2 circle" height="200px" src="' + res.avatar_url+ '" />'
+                    );
+                }
+            });
+
             $(document).ready(function () {
                 $('.collapsible').collapsible({
                     accordion: true
@@ -36,17 +47,17 @@
                         }
                         $('#ajax').append(
                             '<span class="col">' + '\n' + 
-                                '<div class="card grey lighten-4">' + '\n' + 
-                                    '<div class="card-content black-text">' + '\n' + 
+                                '<div class="card">' + '\n' + 
+                                    '<div class="card-content ">' + '\n' + 
                                         '<span><b>' + repo.name + '</b></span><br>' + '\n' + 
                                         '<i><span>' + repo.language + '</span></i>' + '\n' + 
                                         '<p>' + repo.description + '</p>' + '\n' + 
                                     '</div>' + '\n' + 
                                     '<div class="card-action">' + '\n' + 
-                                        '<a class="waves-effect grey darken-4 btn-small" target="_blank"' + '\n' + 
+                                        '<a class="waves-effect btn-small" target="_blank"' + '\n' + 
                                             'href="' + repo.html_url + '"><i' + '\n' + 
                                                 'class="material-icons left">code</i>Code</a>' + '\n' + 
-                                        '<a class="waves-effect grey darken-4 btn-small" target="_blank"' + '\n' + 
+                                        '<a class="waves-effect btn-small" target="_blank"' + '\n' + 
                                             'href="' + repo.homepage + '"><i class="material-icons left">public</i>App</a>' + '\n' + 
                                     '</div>' + '\n' + 
                                 '</div>' + '\n' + 
@@ -56,16 +67,6 @@
                 }
             });
 
-            $.ajax({
-                url: "https://api.github.com/users/briansayre",
-                type: 'GET',
-                success: function(res) {
-                    console.log(res);
-                    $('#pic').append(
-                        '<img class="z-depth-2 circle" height="200px" src="' + res.avatar_url+ '" />'
-                    );
-                }
-            });
 
         });
     </script>
@@ -73,7 +74,7 @@
     <title> Brian Sayre </title>
 </head>
 
-<body>
+<body class="grey darken-4 white-text">
 
     <div class="container">
 
@@ -88,7 +89,7 @@
             <span class="col s12 center">
                 <h2 class="center"> Brian Sayre </h2>
             </span>
-            <h6 class="center"> software engineering student </h6>
+            <h6 class="center"><i> software engineering student </i></h6>
         </span>
 
         <br>
@@ -96,29 +97,29 @@
         <ul class="collapsible">
 
             <li class="active">
-                <div class="collapsible-header"><i class="material-icons">link</i>Links</div>
-                <div class="collapsible-body">
+                <div class="collapsible-header "><i class="material-icons">link</i>Links</div>
+                <div class="collapsible-body ">
                     <span class="row">
                         <span class="col s12 m4  center">
-                            <a class="waves-effect grey darken-4 btn-small" href="https://github.com/briansayre" target="_blank"><i class="material-icons left">code</i>GitHub</a>
+                            <a class="waves-effect btn-small" href="https://github.com/briansayre" target="_blank"><i class="material-icons left">code</i>GitHub</a>
                         </span>
                         <span class="col s12 m4 center">
-                            <a class="waves-effect grey darken-4 btn-small" href="https://www.linkedin.com/in/brian-sayre" target="_blank"><i class="material-icons left">people_outline</i>LinkedIn</a>
+                            <a class="waves-effect btn-small" href="https://www.linkedin.com/in/brian-sayre" target="_blank"><i class="material-icons left">people_outline</i>LinkedIn</a>
                         </span>
                         <span class="col s12 m4 center">
-                            <a class="waves-effect grey darken-4 btn-small" href="https://github.com/briansayre/resume/blob/master/resume.pdf" target="_blank"><i class="material-icons left">content_paste</i>Resume</a>
+                            <a class="waves-effect btn-small" href="https://github.com/briansayre/resume/blob/master/resume.pdf" target="_blank"><i class="material-icons left">content_paste</i>Resume</a>
                         </span>
                     </span>
                 </div>
             </li>
 
             <li class="">
-                <div class="collapsible-header waves-orange"><i class="material-icons">straighten</i>Education</div>
+                <div class="collapsible-header  "><i class="material-icons">straighten</i>Education</div>
                 <div class="collapsible-body">
 
                     <div class="col">
-                        <div class="card grey lighten-4">
-                            <div class="card-content black-text">
+                        <div class="card">
+                            <div class="card-content ">
                                 <span><b>Iowa State University</b></span><br>
                                 <span>Ames, Iowa</span><br>
                                 <i><span>August 2018 - May 2022</span></i>
@@ -135,12 +136,12 @@
             </li>
 
             <li class="">
-                <div class="collapsible-header"><i class="material-icons">work_outline</i>Experience</div>
+                <div class="collapsible-header "><i class="material-icons">work_outline</i>Experience</div>
                 <div class="collapsible-body">
 
                     <div class="col">
-                        <div class="card grey lighten-4">
-                            <div class="card-content black-text">
+                        <div class="card">
+                            <div class="card-content ">
                                 <span><b>Software Engineer Intern</b></span><br>
                                 <span>Principal Financial Group, Des Moines, Iowa</span><br>
                                 <i><span>May 2020 - August 2020</span></i>
@@ -156,8 +157,8 @@
                     </div>
 
                     <div class="col">
-                        <div class="card grey lighten-4">
-                            <div class="card-content black-text">
+                        <div class="card">
+                            <div class="card-content ">
                                 <span><b>Software Engineering Learning Community Peer Mentor</b></span><br>
                                 <span>Iowa State University, Ames, Iowa</span><br>
                                 <i><span>August 2019 - Present</span></i>
@@ -178,7 +179,7 @@
             </li>
 
             <li class="">
-                <div class="collapsible-header"><i class="material-icons">code</i>Projects</div>
+                <div class="collapsible-header "><i class="material-icons">code</i>Projects</div>
                 <div class="collapsible-body projects">
 
                     <div id="ajax"></div>
@@ -186,7 +187,7 @@
                 </div>
             </li>
             <li class="">
-                <div class="collapsible-header"><i class="material-icons">chat_bubble_outline</i>Contact</div>
+                <div class="collapsible-header "><i class="material-icons">chat_bubble_outline</i>Contact</div>
                 <div class="collapsible-body">
 
                     <span class="row">
