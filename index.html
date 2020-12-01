@@ -16,15 +16,88 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script>
+
+        var dark = true;
+
+        function toggleDark() {
+
+            if (dark) {
+
+                dark = false;
+                // body
+                document.getElementsByTagName("body")[0].style.color = "black"
+                document.getElementsByTagName("body")[0].style.backgroundColor= "white"
+
+                // collapsible-header
+                var ch = document.getElementsByClassName("collapsible-header")
+                for (var i = 0; i < ch.length; i++) {
+                    ch[i].style.color = "black"
+                    ch[i].style.backgroundColor= "#F5F5F5"
+                    ch[i].style.borderBottom = "1px solid #BDBDBD"
+                    console.log(ch[i])
+                }
+                
+                // collapsible-body
+                var cb = document.getElementsByClassName("collapsible-body")
+                for (var i = 0; i < cb.length; i++) {
+                    cb[i].style.color = "black"
+                    cb[i].style.backgroundColor= "#FAFAFA"
+                    cb[i].style.borderBottom = "1px solid #BDBDBD"
+                }
+
+                // cards
+                var c = document.getElementsByClassName("card")
+                for (var i = 0; i < c.length; i++) {
+                    c[i].style.color = "black"
+                    c[i].style.backgroundColor= "white"
+                }
+
+                document.getElementById("toggle").style.color = "black"
+
+            } else {
+
+                dark = true;
+                // body
+                document.getElementsByTagName("body")[0].style.color = "white"
+                document.getElementsByTagName("body")[0].style.backgroundColor= "#212121"
+
+                // collapsible-header
+                var ch = document.getElementsByClassName("collapsible-header")
+                for (var i = 0; i < ch.length; i++) {
+                    ch[i].style.color = "white"
+                    ch[i].style.backgroundColor= "#2B2B2B"
+                    ch[i].style.borderBottom = "1px solid #121212"
+                    console.log(ch[i])
+                }
+                
+                // collapsible-body
+                var cb = document.getElementsByClassName("collapsible-body")
+                for (var i = 0; i < cb.length; i++) {
+                    cb[i].style.color = "white"
+                    cb[i].style.backgroundColor= "#313131"
+                    cb[i].style.borderBottom = "1px solid #121212"
+                }
+
+                // cards
+                var c = document.getElementsByClassName("card")
+                for (var i = 0; i < c.length; i++) {
+                    c[i].style.color = "white"
+                    c[i].style.backgroundColor= "#373737"
+                }
+
+                document.getElementById("toggle").style.color = "white"
+            }
+        }
+
+
         $(document).ready(function () {
 
             $.ajax({
                 url: "https://api.github.com/users/briansayre",
                 type: 'GET',
-                success: function(res) {
-                    console.log(res);
+                success: function (res) {
                     $('#pic').append(
-                        '<img class="z-depth-2 circle" height="200px" src="' + res.avatar_url+ '" />'
+                        '<img class="z-depth-2 circle" height="200px" src="' + res.avatar_url + '" />'
                     );
                 }
             });
@@ -39,34 +112,32 @@
             $.ajax({
                 url: "https://api.github.com/users/briansayre/starred",
                 type: 'GET',
-                success: function(res) {
-                    console.log(res);
+                success: function (res) {
                     $.each(res, function (index, repo) {
                         if (repo.homepage == "") {
                             repo.homepage = "https://github.com/briansayre"
                         }
                         $('#ajax').append(
-                            '<span class="col">' + '\n' + 
-                                '<div class="card">' + '\n' + 
-                                    '<div class="card-content ">' + '\n' + 
-                                        '<span><b>' + repo.name + '</b></span><br>' + '\n' + 
-                                        '<i><span>' + repo.language + '</span></i>' + '\n' + 
-                                        '<p>' + repo.description + '</p>' + '\n' + 
-                                    '</div>' + '\n' + 
-                                    '<div class="card-action">' + '\n' + 
-                                        '<a class="waves-effect btn-small" target="_blank"' + '\n' + 
-                                            'href="' + repo.html_url + '"><i' + '\n' + 
-                                                'class="material-icons left">code</i>Code</a>' + '\n' + 
-                                        '<a class="waves-effect btn-small" target="_blank"' + '\n' + 
-                                            'href="' + repo.homepage + '"><i class="material-icons left">public</i>App</a>' + '\n' + 
-                                    '</div>' + '\n' + 
-                                '</div>' + '\n' + 
+                            '<span class="col">' + '\n' +
+                            '<div class="card">' + '\n' +
+                            '<div class="card-content ">' + '\n' +
+                            '<span><b>' + repo.name + '</b></span><br>' + '\n' +
+                            '<i><span>' + repo.language + '</span></i>' + '\n' +
+                            '<p>' + repo.description + '</p>' + '\n' +
+                            '</div>' + '\n' +
+                            '<div class="card-action">' + '\n' +
+                            '<a class="waves-effect btn-small" target="_blank"' + '\n' +
+                            'href="' + repo.html_url + '"><i' + '\n' +
+                            'class="material-icons left">code</i>Code</a>' + '\n' +
+                            '<a class="waves-effect btn-small" target="_blank"' + '\n' +
+                            'href="' + repo.homepage + '"><i class="material-icons left">public</i>App</a>' + '\n' +
+                            '</div>' + '\n' +
+                            '</div>' + '\n' +
                             '</span>' + '\n'
                         );
                     })
                 }
             });
-
 
         });
     </script>
@@ -74,7 +145,7 @@
     <title> Brian Sayre </title>
 </head>
 
-<body class="grey darken-4 white-text">
+<body>
 
     <div class="container">
 
@@ -100,21 +171,25 @@
                 <div class="collapsible-header "><i class="material-icons">link</i>Links</div>
                 <div class="collapsible-body ">
                     <span class="row">
-                        <span class="col s12 m4  center">
-                            <a class="waves-effect btn-small" href="https://github.com/briansayre" target="_blank"><i class="material-icons left">code</i>GitHub</a>
+                        <span class="col s12 m4 center">
+                            <a class="waves-effect btn-small" href="https://github.com/briansayre" target="_blank"><i
+                                    class="material-icons left">code</i>GitHub</a>
                         </span>
                         <span class="col s12 m4 center">
-                            <a class="waves-effect btn-small" href="https://www.linkedin.com/in/brian-sayre" target="_blank"><i class="material-icons left">people_outline</i>LinkedIn</a>
+                            <a class="waves-effect btn-small" href="https://www.linkedin.com/in/brian-sayre"
+                                target="_blank"><i class="material-icons left">people_outline</i>LinkedIn</a>
                         </span>
                         <span class="col s12 m4 center">
-                            <a class="waves-effect btn-small" href="https://github.com/briansayre/resume/blob/master/resume.pdf" target="_blank"><i class="material-icons left">content_paste</i>Resume</a>
+                            <a class="waves-effect btn-small"
+                                href="https://github.com/briansayre/resume/blob/master/resume.pdf" target="_blank"><i
+                                    class="material-icons left">content_paste</i>Resume</a>
                         </span>
                     </span>
                 </div>
             </li>
 
             <li class="">
-                <div class="collapsible-header  "><i class="material-icons">straighten</i>Education</div>
+                <div class="collapsible-header"><i class="material-icons">straighten</i>Education</div>
                 <div class="collapsible-body">
 
                     <div class="col">
@@ -179,7 +254,7 @@
             </li>
 
             <li class="">
-                <div class="collapsible-header "><i class="material-icons">code</i>Projects</div>
+                <div class="collapsible-header"><i class="material-icons">code</i>Projects</div>
                 <div class="collapsible-body projects">
 
                     <div id="ajax"></div>
@@ -187,7 +262,7 @@
                 </div>
             </li>
             <li class="">
-                <div class="collapsible-header "><i class="material-icons">chat_bubble_outline</i>Contact</div>
+                <div class="collapsible-header"><i class="material-icons">chat_bubble_outline</i>Contact</div>
                 <div class="collapsible-body">
 
                     <span class="row">
@@ -211,11 +286,17 @@
                 </div>
             </li>
         </ul>
-
-    </div>
+        <br>
+        <div class="row">
+            <div class="center">
+                <a href="#" onclick="toggleDark()" id="toggle">Toggle dark mode</a>
+            </div>
+        </div>
+        
+        </div>
 
     <script type="text/javascript" src="js/materialize.min.js"></script>
-    
+
 </body>
 
 </html>

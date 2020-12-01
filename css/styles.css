@@ -13,7 +13,8 @@ img {
 }
 
 body {
-    background-color: #121212;
+    background-color: #212121;
+    color: white;
 }
 
 .collapsible-header {
@@ -35,5 +36,9 @@ body {
 .card {
     background-color: #373737;
     border-left: 2px solid #4DB6AC;
+    color: white;
+}
+
+#toggle {
     color: white;
 }
