@@ -16,7 +16,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <title> Brian Sayre </title>
-    
+
 </head>
 
 <body>
@@ -166,88 +166,12 @@
                 <a href="#" onclick="toggleDark()" id="toggle">Toggle dark mode</a>
             </div>
         </div>
-        
-        </div>
+
+    </div>
 
     <script type="text/javascript" src="js/materialize.min.js"></script>
 
     <script>
-
-        var dark = false;
-        toggleDark()
-
-        function toggleDark() {
-
-            document.getElementsByClassName("collapsible")[0].style.border = "0px solid black"
-
-            if (dark) {
-
-                dark = false;
-                // body
-                document.body.style.color = "black"
-                document.body.style.backgroundColor= "white"
-
-                // collapsible-header
-                var ch = document.getElementsByClassName("collapsible-header")
-                for (var i = 0; i < ch.length; i++) {
-                    ch[i].style.color = "black"
-                    ch[i].style.backgroundColor= "#F5F5F5"
-                    ch[i].style.borderBottom = "1px solid #BDBDBD"
-                    console.log(ch[i])
-                }
-                
-                // collapsible-body
-                var cb = document.getElementsByClassName("collapsible-body")
-                for (var i = 0; i < cb.length; i++) {
-                    cb[i].style.color = "black"
-                    cb[i].style.backgroundColor= "#FAFAFA"
-                    cb[i].style.borderBottom = "1px solid #BDBDBD"
-                }
-
-                // cards
-                var c = document.getElementsByClassName("card")
-                for (var i = 0; i < c.length; i++) {
-                    c[i].style.color = "black"
-                    c[i].style.backgroundColor= "white"
-                }
-
-                document.getElementById("toggle").style.color = "black"
-
-            } else {
-
-                dark = true;
-                // body
-                document.getElementsByTagName("body")[0].style.color = "white"
-                document.getElementsByTagName("body")[0].style.backgroundColor= "#212121"
-
-                // collapsible-header
-                var ch = document.getElementsByClassName("collapsible-header")
-                for (var i = 0; i < ch.length; i++) {
-                    ch[i].style.color = "white"
-                    ch[i].style.backgroundColor= "#2B2B2B"
-                    ch[i].style.borderBottom = "1px solid #121212"
-                    console.log(ch[i])
-                }
-                
-                // collapsible-body
-                var cb = document.getElementsByClassName("collapsible-body")
-                for (var i = 0; i < cb.length; i++) {
-                    cb[i].style.color = "white"
-                    cb[i].style.backgroundColor= "#313131"
-                    cb[i].style.borderBottom = "1px solid #121212"
-                }
-
-                // cards
-                var c = document.getElementsByClassName("card")
-                for (var i = 0; i < c.length; i++) {
-                    c[i].style.color = "white"
-                    c[i].style.backgroundColor= "#373737"
-                }
-
-                document.getElementById("toggle").style.color = "white"
-            }
-        }
-
 
         $(document).ready(function () {
 
@@ -256,7 +180,7 @@
                 type: 'GET',
                 success: function (res) {
                     $('#pic').append(
-                        '<img class="z-depth-2 circle" height="200px" src="' + res.avatar_url + '" />'
+                        '<img class="z-depth-2 circle" id="img" height="200px" src="' + res.avatar_url + '" />'
                     );
                 }
             });
@@ -299,6 +223,99 @@
             });
 
         });
+
+
+        var dark = false;
+        toggleDark()
+        toggleDark()
+        function toggleDark() {
+
+            document.getElementsByClassName("collapsible")[0].style.border = "0px solid black"
+
+            if (dark) {
+
+                dark = false;
+                // body
+                document.body.style.color = "black"
+                document.body.style.backgroundColor = "white"
+
+                // collapsible-header
+                var ch = document.getElementsByClassName("collapsible-header")
+                for (var i = 0; i < ch.length; i++) {
+                    ch[i].style.color = "black"
+                    ch[i].style.backgroundColor = "#F5F5F5"
+                    ch[i].style.borderBottom = "1px solid #BDBDBD"
+                    console.log(ch[i])
+                }
+
+                // collapsible-body
+                var cb = document.getElementsByClassName("collapsible-body")
+                for (var i = 0; i < cb.length; i++) {
+                    cb[i].style.color = "black"
+                    cb[i].style.backgroundColor = "#FAFAFA"
+                    cb[i].style.borderBottom = "1px solid #BDBDBD"
+                }
+
+                // cards
+                var c = document.getElementsByClassName("card")
+                for (var i = 0; i < c.length; i++) {
+                    c[i].style.color = "black"
+                    c[i].style.borderLeft = "3px solid #E57373"
+                    c[i].style.backgroundColor = "white"
+                }
+
+                // buttons
+                var b = document.getElementsByClassName("btn-small")
+                for (var i = 0; i < b.length; i++) {
+                    b[i].style.backgroundColor = "#E57373"
+                }
+
+                document.getElementById("toggle").style.color = "black"
+                document.getElementById("img").style.border = "3px solid #E57373"
+
+            } else {
+
+                dark = true;
+                // body
+                document.getElementsByTagName("body")[0].style.color = "white"
+                document.getElementsByTagName("body")[0].style.backgroundColor = "#212121"
+
+                // collapsible-header
+                var ch = document.getElementsByClassName("collapsible-header")
+                for (var i = 0; i < ch.length; i++) {
+                    ch[i].style.color = "white"
+                    ch[i].style.backgroundColor = "#2B2B2B"
+                    ch[i].style.borderBottom = "1px solid #121212"
+                    console.log(ch[i])
+                }
+
+                // collapsible-body
+                var cb = document.getElementsByClassName("collapsible-body")
+                for (var i = 0; i < cb.length; i++) {
+                    cb[i].style.color = "white"
+                    cb[i].style.backgroundColor = "#313131"
+                    cb[i].style.borderBottom = "1px solid #121212"
+                }
+
+                // cards
+                var c = document.getElementsByClassName("card")
+                for (var i = 0; i < c.length; i++) {
+                    c[i].style.color = "white"
+                    c[i].style.borderLeft = "3px solid #2BBBAD"
+                    c[i].style.backgroundColor = "#373737"
+                }
+
+                // buttons
+                var b = document.getElementsByClassName("btn-small")
+                for (var i = 0; i < b.length; i++) {
+                    b[i].style.backgroundColor = "#2BBBAD"
+                }
+
+                document.getElementById("toggle").style.color = "white"
+                document.getElementById("img").style.border = "3px solid #2BBBAD"
+            }
+        }
+
     </script>
 
 </body>
