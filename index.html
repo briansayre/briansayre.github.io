@@ -189,7 +189,6 @@
                 $('.collapsible').collapsible({
                     accordion: true
                 });
-
             });
 
             $.ajax({
@@ -219,6 +218,7 @@
                             '</span>' + '\n'
                         );
                     })
+                    toggleDark()
                 }
             });
 
@@ -226,8 +226,7 @@
 
 
         var dark = false;
-        toggleDark()
-        toggleDark()
+
         function toggleDark() {
 
             document.getElementsByClassName("collapsible")[0].style.border = "0px solid black"
