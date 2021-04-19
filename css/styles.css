@@ -1,3 +1,8 @@
+body {
+    background-color: 212121;
+    color: white;
+}
+
 .indent { 
     margin-left: 15px;
 }
@@ -9,4 +14,29 @@ img {
 .btn-small {
     width: 130px;
     margin: 5px 0;
+}
+
+.collapsible {
+    border: 0px solid white;
+}
+.collapsible-header {
+    color: white;
+    background-color: #2B2B2B;
+    border-bottom: 1px solid #121212;
+}
+
+.collapsible-body {
+    color: white;
+    background-color: #313131;
+    border-bottom: 1px solid #121212;
+}
+
+.card {
+    color: white;
+    background-color: #393939;
+    border-left: 1px solid #2BBBAD;
+}
+
+.btn-small {
+    background-color: #2BBBAD;
 }
