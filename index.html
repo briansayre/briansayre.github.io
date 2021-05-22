@@ -34,33 +34,30 @@
                 <span class="col s12 center">
                     <h2 class="center"> Brian Sayre </h2>
                 </span>
-                <h6 class="center"><i> software engineering student </i></h6>
+                <h6 class="center"><i> Software Engineering Student </i></h6>
+            </span>
+            <br>
+            <span class="row">
+                <span class ="col m8 s12 offset-m2 offset-s0">
+                    <span class ="row center">
+                        <span class="col m4 s12">
+                            <a class="waves-effect btn-flat" href="https://github.com/briansayre" target="_blank"><i
+                                    class="material-icons left">code</i>GitHub</a>
+                        </span>
+                        <span class="col m4 s12">
+                            <a class="waves-effect btn-flat" href="https://www.linkedin.com/in/brian-sayre"
+                                target="_blank"><i class="material-icons left">people_outline</i>LinkedIn</a>
+                        </span>
+                        <span class="col m4  s12">
+                            <a class="waves-effect btn-flat"
+                                href="https://github.com/briansayre/resume/blob/master/resume.pdf" target="_blank"><i
+                                    class="material-icons left">content_paste</i>Resume</a>
+                        </span>
+                    </span>
+                </span>
             </span>
 
-            <br>
-
             <ul class="collapsible">
-
-                <li class="active">
-                    <div class="collapsible-header "><i class="material-icons">link</i>Links</div>
-                    <div class="collapsible-body ">
-                        <span class="row">
-                            <span class="col s12 m4 center">
-                                <a class="waves-effect btn-small" href="https://github.com/briansayre" target="_blank"><i
-                                        class="material-icons left">code</i>GitHub</a>
-                            </span>
-                            <span class="col s12 m4 center">
-                                <a class="waves-effect btn-small" href="https://www.linkedin.com/in/brian-sayre"
-                                    target="_blank"><i class="material-icons left">people_outline</i>LinkedIn</a>
-                            </span>
-                            <span class="col s12 m4 center">
-                                <a class="waves-effect btn-small"
-                                    href="https://github.com/briansayre/resume/blob/master/resume.pdf" target="_blank"><i
-                                        class="material-icons left">content_paste</i>Resume</a>
-                            </span>
-                        </span>
-                    </div>
-                </li>
 
                 <li class="">
                     <div class="collapsible-header"><i class="material-icons">straighten</i>Education</div>
@@ -75,7 +72,7 @@
                                     <ul class="indent">
                                         <li>• Software Engineering major</li>
                                         <li>• Data Science minor</li>
-                                        <li>• 3.89 / 4.0 GPA</li>
+                                        <li>• 3.88 / 4.0 GPA</li>
                                     </ul>
                                 </div>
                             </div>
@@ -131,7 +128,9 @@
                     <div class="collapsible-header"><i class="material-icons">code</i>Projects</div>
                     <div class="collapsible-body projects">
 
+                        <span class="row">
                         <div id="ajax"></div>
+                        </span>
 
                     </div>
                 </li>
@@ -193,11 +192,10 @@
                                 repo.homepage = "https://github.com/briansayre"
                             }
                             $('#ajax').append(
-                                '<span class="col">' + '\n' +
+                                '<span class="col m6 s12">' + '\n' +
                                 '<div class="card">' + '\n' +
-                                '<div class="card-content ">' + '\n' +
-                                '<span><b>' + repo.name + '</b></span><br>' + '\n' +
-                                '<i><span>' + repo.language + '</span></i>' + '\n' +
+                                '<div class="card-content " style="height:170px">' + '\n' +
+                                '<span><b>' + repo.name + '</b></span> - <i><span>' + repo.language + '</span></i><br><br>' + '\n' +
                                 '<p>' + repo.description + '</p>' + '\n' +
                                 '</div>' + '\n' +
                                 '<div class="card-action">' + '\n' +
