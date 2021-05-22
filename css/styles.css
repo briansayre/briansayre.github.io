@@ -1,6 +1,13 @@
 body {
+    background-image: url('./img/header.jpg');
     background-color: #212121;
     color: white;
+    min-height: 1000px;
+    height: 1000px;
+}
+
+.site-header {
+    background-image: url('/img/header.jpg');
 }
 
 .indent { 
@@ -10,6 +17,7 @@ body {
 img {
     border: 2px solid #4DB6AC;
 }
+
 
 .btn-small {
     width: 130px;
@@ -39,4 +47,7 @@ img {
 
 .btn-small {
     background-color: #2BBBAD;
+}
+.btn-flat {
+    color: white;
 }
