@@ -87,6 +87,17 @@ body {
         margin: 0 auto 25px auto;
     }
 
+    #header {
+        width: 100%;
+        position: relative;
+        left: 0px;
+        margin: 0;
+    }
+
+    #content {
+        margin:0;
+    }
+
 }
 
 .hidden {
