@@ -17,6 +17,7 @@ body {
     left: -25px;
     border-bottom-left-radius: .25rem;
     border-bottom-right-radius: .25rem;
+    filter: brightness(75%);
 }
 
 #left-column {
