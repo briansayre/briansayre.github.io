@@ -1,0 +1,93 @@
+body {
+    background-color: #F2F2F2;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+#header {
+    margin: 0;
+    height: 300px;
+    background-image: url("../images/header.JPG");
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-size: cover;
+    width: calc(100% + 50px);
+    position: relative;
+    left: -25px;
+    border-bottom-left-radius: .25rem;
+    border-bottom-right-radius: .25rem;
+}
+
+#left-column {
+    position: relative;
+    top: -150px;
+}
+
+#right-column {
+    position: relative;
+    top: -25px;
+}
+
+.profile-pic {
+    border-radius: .25rem;
+    margin-bottom: 25px;
+    box-shadow: 0 .5em 1em -.125em rgba(10,10,10,.1),0 0 0 1px rgba(10,10,10,.02);
+}
+
+#info {
+    margin-bottom: 25px;
+}
+
+#left-column a {
+    margin-bottom: 25px;
+    width: 100%;
+    box-shadow: 0 .5em 1em -.125em rgba(10,10,10,.1),0 0 0 1px rgba(10,10,10,.02);
+}
+
+.card {
+    margin-bottom: 25px;
+}
+
+.card-icon {
+    float: right;
+    color: #485fc7;
+}
+
+.is-size-5 {
+    font-weight: bold;
+}
+
+#repo {
+    margin-bottom: 0px;
+}
+
+#repo .card-content {
+    min-height: 175px;
+}
+
+@media (max-width:669px) {
+
+    #right-column {
+        position: relative;
+        top: -150px;
+    }
+
+    #info {
+        text-align: center;
+    }
+
+    #joke {
+        text-align: center;
+    }
+
+    #img {
+        display:block;
+        margin: 0 auto 25px auto;
+    }
+
+}
+
+.hidden {
+    display: none;
+}
