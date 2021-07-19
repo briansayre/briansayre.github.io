@@ -3,6 +3,27 @@ $(document).ready(function () {
     var languages = []
     var languagesFilter = []
     var repos;
+    
+    $.ajax({
+        url: "https://api.github.com/users/briansayre",
+        type: 'GET',
+        success: function (res) {
+            $('#pic').append(
+                '<img class="profile-pic has-shadow" id="img" src="' + res.avatar_url + '" />'
+            );
+        }
+    });
+
+    $.ajax({
+        url: "https://official-joke-api.appspot.com/jokes/programming/random",
+        type: 'GET',
+        success: function (res) {
+            $('#joke').append(
+                '<span class="has-text-weight-semibold"> ' + res[0].setup + '</span> <br>' +
+                '<br><span> ' + res[0].punchline + '</span>'
+            );
+        }
+    });
 
     $("#experience, #code").click(function (e) {
         let tab = e.target.innerText.trim();
@@ -119,27 +140,5 @@ $(document).ready(function () {
         }
     });
 
-
-
-    $.ajax({
-        url: "https://api.github.com/users/briansayre",
-        type: 'GET',
-        success: function (res) {
-            $('#pic').append(
-                '<img class="profile-pic has-shadow" id="img" src="' + res.avatar_url + '" />'
-            );
-        }
-    });
-
-    $.ajax({
-        url: "https://official-joke-api.appspot.com/random_joke",
-        type: 'GET',
-        success: function (res) {
-            $('#joke').append(
-                '<span class="has-text-weight-semibold"> ' + res.setup + '</span> <br>' +
-                '<br><span> ' + res.punchline + '</span>'
-            );
-        }
-    });
 
 });
