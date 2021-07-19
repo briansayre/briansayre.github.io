@@ -93,7 +93,6 @@ body {
   #img {
     display: block;
     margin: 0 auto 25px auto;
-    border-radius: 100%;
   }
 
   #header {
@@ -101,6 +100,7 @@ body {
     position: relative;
     left: 0px;
     margin: 0;
+    border-radius: 0;
   }
 
   #content {
