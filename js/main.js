@@ -75,7 +75,7 @@ $(document).ready(function () {
             tags = $('.tags');
             languages.forEach(function (item, index) {
                 tags.append(
-                    '<span class="tag taggle is-white" id="' + item + '" data-filter="' + item + '">' + item + '</span>'
+                    '<span class="tag taggle is-clickable is-unselectable is-white" id="' + item + '" data-filter="' + item + '">' + item + '</span>'
                 );
             });
 
