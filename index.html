@@ -8,8 +8,6 @@
         window.dataLayer = window.dataLayer || [];
         function gtag() {
             dataLayer.push(arguments);
-            console.log(arguments);
-            console.log(dataLayer);
         }
         gtag('js', new Date());
         gtag('config', 'G-N1Q4HZ9S35');
@@ -78,23 +76,20 @@
                         <span>Contact me</span>
                     </a>
                 </div>
-                <div class="is-italic" id="joke">
-                </div>
             </div>
             <div class="column is-10-mobile is-offset-1-mobile" id="right-column">
-                <div class="card" id="tabs">
+                <div class="card is-shadowless" id="tabs">
                     <footer class="card-footer">
-                        <a href="javascript:void(0);" id="experience"
-                            class="card-footer-item has-text-weight-semibold is-active">
+                        <a href="javascript:void(0);" id="experience" class="card-footer-item  selected-tab">
                             <span>Experience</span>
                         </a>
-                        <a href="javascript:void(0);" id="code" class="card-footer-item">
+                        <a href="javascript:void(0);" id="code" class=" card-footer-item">
                             <span>Code</span>
                         </a>
                     </footer>
                 </div>
                 <section class="" id="experience-section">
-                    <div class="card ">
+                    <div class="card is-shadowless">
                         <div class="card-content ">
                             <span class="icon card-icon">
                                 <i class="fas fa-graduation-cap"></i>
@@ -112,7 +107,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="card">
+                    <div class="card is-shadowless">
                         <div class="card-content">
                             <span class="icon card-icon">
                                 <i class="fas fa-briefcase" aria-hidden="true"></i>
@@ -136,7 +131,7 @@
                             </span>
                         </div>
                     </div>
-                    <div class="card ">
+                    <div class="card is-shadowless">
                         <div class="card-content">
                             <span class="icon card-icon">
                                 <i class="fas fa-briefcase" aria-hidden="true"></i>
@@ -163,11 +158,23 @@
                     </div>
                 </section>
                 <section class="hidden" id="code-section">
-                    <div class="columns is-multiline" id="repos"></div>
+                    <div class="columns is-multiline" id="repos">
+                        <div class="column is-12">
+                            <div class="tags are-medium">
+
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </div>
         </div>
     </div>
 </body>
+<footer class="footer">
+    <div class="content has-text-centered">
+            <div class="is-italic" id="joke">
+            </div>
+    </div>
+</footer>
 
 </html>

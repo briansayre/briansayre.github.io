@@ -1,39 +1,42 @@
 $(document).ready(function () {
 
-    $.ajax({
-        url: "https://api.github.com/users/briansayre",
-        type: 'GET',
-        success: function (res) {
-            $('#pic').append(
-                '<img class="profile-pic" id="img" src="' + res.avatar_url + '" />'
-            );
-        }
-    });
+    var languages = []
+    var languagesFilter = []
+    var repos;
 
     $("#experience, #code").click(function (e) {
         let tab = e.target.innerText.trim();
         if (tab == "Experience") {
             $('#experience-section').removeClass('hidden');
             $('#code-section').addClass('hidden');
-            $('#experience').addClass('has-text-weight-semibold');
-            $('#code').removeClass('has-text-weight-semibold');
+            $('#experience').addClass('selected-tab');
+            $('#code').removeClass('selected-tab');
         } else if (tab == "Code") {
             $('#experience-section').addClass('hidden');
             $('#code-section').removeClass('hidden');
-            $('#experience').removeClass('has-text-weight-semibold');
-            $('#code').addClass('has-text-weight-semibold');
+            $('#experience').removeClass('selected-tab');
+            $('#code').addClass('selected-tab');
         }
     });
+
 
     $.ajax({
         url: "https://api.github.com/users/briansayre/starred",
         type: 'GET',
         success: function (res) {
+            repos = $('#repos');
             $.each(res, function (index, repo) {
+                //languagesFilter = languages;
                 if (repo.homepage == "") {
                     repo.homepage = "https://github.com/briansayre"
                 }
-                let icon = "fas fa-code";
+                if (repo.language == "C++") {
+                    repo.language = "C";
+                }
+                if (!languages.includes(repo.language)) {
+                    languages.push(repo.language);
+                }
+                let icon = '<i class="fas fa-code"></i>';
                 if (repo.language == "HTML") {
                     icon = '<i class="fab fa-html5"></i>';
                 } else if (repo.language == "Python") {
@@ -42,10 +45,12 @@ $(document).ready(function () {
                     icon = '<i class="fab fa-js-square"></i>';
                 } else if (repo.language == "Java") {
                     icon = '<i class="fab fa-java"></i>';
+                } else if (repo.language == "C" || repo.language == "C++") {
+                    icon = '<i class="fab fa-cuttlefish"></i>';
                 }
-                $('#repos').append(
-                    '<div class="column is-6">' + '\n' +
-                    '<div class="card" id="repo">' + '\n' +
+                repos.append(
+                    '<div class="column is-6 ' + repo.language + '">' + '\n' +
+                    '<div class="card is-shadowless" id="repo">' + '\n' +
                     '<div class="card-content">' + '\n' +
                     '<span class="icon card-icon">' + '\n' +
                     icon + '\n' +
@@ -53,19 +58,76 @@ $(document).ready(function () {
                     '<p class="is-size-5">' + '\n' +
                     repo.name + '\n' +
                     '</p>' + '\n' +
-                    '<span>' + repo.language + '</span><br>' + '\n' +
+                    '<span><i>' + repo.language + '</i></span><br><br>' + '\n' +
                     '<span class="content">' + '\n' +
                     repo.description + '\n' +
                     '</span>' + '\n' +
                     '</div>' + '\n' +
                     '<footer class="card-footer">' + '\n' +
-                    '<a href="' + repo.homepage + '" class="card-footer-item" target="_blank" >App</a>' + '\n' +
-                    '<a href="' + repo.html_url + '" class="card-footer-item" target="_blank" >Code</a>' + '\n' +
+                    '<a href="' + repo.homepage + '" class="card-footer-item" target="_blank" >View app</a>' + '\n' +
+                    '<a href="' + repo.html_url + '" class="card-footer-item" target="_blank" >View code</a>' + '\n' +
                     '</footer>' + '\n' +
                     '</div>' + '\n' +
                     '</div>' + '\n'
                 );
             })
+
+            tags = $('.tags');
+            languages.forEach(function (item, index) {
+                tags.append(
+                    '<span class="tag taggle is-white" id="' + item + '" data-filter="' + item + '">' + item + '</span>'
+                );
+            });
+
+            tags.append('<button class="delete taggle is-medium" id="all" data-filter="all"></button>')
+            $('#all').hide();
+
+            $(".taggle").click(function (e) {
+
+                e.preventDefault();
+                curLang = $(this).data('filter');
+
+                if (curLang == "all") {
+                    languagesFilter = [];
+                } else if (languagesFilter.includes(curLang)) {
+                    languagesFilter.splice(languagesFilter.indexOf(curLang), 1);
+                } else {
+                    languagesFilter.push(curLang);
+                }
+
+                languages.forEach(function (item, index) {
+                    $('.' + item).hide();
+                    $('#' + item).removeClass("is-link");
+                    $('#' + item).addClass("is-white");
+                });
+                languagesFilter.forEach(function (item, index) {
+                    $('.' + item).show();
+                    $('#' + item).removeClass("is-white");
+                    $('#' + item).addClass("is-link");
+                });
+
+                if (languagesFilter.length == 0) {
+                    $('#all').hide();
+                    languages.forEach(function (item, index) {
+                        $('.' + item).show();
+                    });
+                } else {
+                    $('#all').show();
+                }
+
+            });
+        }
+    });
+
+
+
+    $.ajax({
+        url: "https://api.github.com/users/briansayre",
+        type: 'GET',
+        success: function (res) {
+            $('#pic').append(
+                '<img class="profile-pic has-shadow" id="img" src="' + res.avatar_url + '" />'
+            );
         }
     });
 
@@ -75,7 +137,7 @@ $(document).ready(function () {
         success: function (res) {
             $('#joke').append(
                 '<span class="has-text-weight-semibold"> ' + res.setup + '</span> <br>' +
-                '<span> ' + res.punchline + '</span>'
+                '<br><span> ' + res.punchline + '</span>'
             );
         }
     });
