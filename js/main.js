@@ -3,16 +3,6 @@ $(document).ready(function () {
     var languages = []
     var languagesFilter = []
     var repos;
-    
-    $.ajax({
-        url: "https://api.github.com/users/briansayre",
-        type: 'GET',
-        success: function (res) {
-            $('#pic').append(
-                '<img class="profile-pic has-shadow" id="img" src="' + res.avatar_url + '" />'
-            );
-        }
-    });
 
     $.ajax({
         url: "https://official-joke-api.appspot.com/jokes/programming/random",
