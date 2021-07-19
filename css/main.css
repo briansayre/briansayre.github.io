@@ -56,7 +56,7 @@ body {
 
 .card-icon {
   float: right;
-  color: #485fc7;
+  color: #363636;
 }
 
 .is-size-5 {
@@ -110,4 +110,27 @@ body {
 
 .hidden {
   display: none;
+}
+
+
+.red-left {
+  border-left: 3px solid red;
+}
+.orange-left {
+  border-left: 3px solid orange;
+}
+.yellow-left {
+  border-left: 3px solid yellow;
+}
+.green-left {
+  border-left: 3px solid green;
+}
+.blue-left {
+  border-left: 3px solid #485fc7;
+}
+.purple-left {
+  border-left: 3px solid purple;
+}
+.pink-left {
+  border-left: 3px solid pink;
 }

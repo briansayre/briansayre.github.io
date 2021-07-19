@@ -3,6 +3,18 @@ $(document).ready(function () {
     var languages = []
     var languagesFilter = []
     var repos;
+    var stringToColor = function(str) {
+        var hash = 0;
+        for (var i = 0; i < str.length; i++) {
+          hash = str.charCodeAt(i) + ((hash << 5) - hash);
+        }
+        var colour = '#';
+        for (var i = 0; i < 3; i++) {
+          var value = (hash >> (i * 8)) & 0xFF;
+          colour += ('00' + value.toString(16)).substr(-2);
+        }
+        return colour;
+      }
 
     $.ajax({
         url: "https://official-joke-api.appspot.com/jokes/programming/random",
@@ -38,6 +50,7 @@ $(document).ready(function () {
             repos = $('#repos');
             $.each(res, function (index, repo) {
                 //languagesFilter = languages;
+                let border="blue-left"
                 if (repo.homepage == "") {
                     repo.homepage = "https://github.com/briansayre"
                 }
@@ -50,18 +63,23 @@ $(document).ready(function () {
                 let icon = '<i class="fas fa-code"></i>';
                 if (repo.language == "HTML") {
                     icon = '<i class="fab fa-html5"></i>';
+                    border = "orange-left"
                 } else if (repo.language == "Python") {
                     icon = '<i class="fab fa-python"></i>';
+                    border = "purple-left"
                 } else if (repo.language == "JavaScript") {
                     icon = '<i class="fab fa-js-square"></i>';
+                    border = "green-left"
                 } else if (repo.language == "Java") {
                     icon = '<i class="fab fa-java"></i>';
+                    border = "purple-left"
                 } else if (repo.language == "C" || repo.language == "C++") {
                     icon = '<i class="fab fa-cuttlefish"></i>';
+                    border = "red-left"
                 }
                 repos.append(
                     '<div class="column is-6 ' + repo.language + '">' + '\n' +
-                    '<div class="card is-shadowless" id="repo">' + '\n' +
+                    '<div class="card is-shadowless" id="repo" style="border-left: 3px solid ' + stringToColor(repo.language) + ';">' + '\n' +
                     '<div class="card-content">' + '\n' +
                     '<span class="icon card-icon">' + '\n' +
                     icon + '\n' +
