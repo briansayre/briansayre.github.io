@@ -49,7 +49,6 @@ $(document).ready(function () {
         success: function (res) {
             repos = $('#repos');
             $.each(res, function (index, repo) {
-                //languagesFilter = languages;
                 let border="blue-left"
                 if (repo.homepage == "") {
                     repo.homepage = "https://github.com/briansayre"
@@ -79,7 +78,7 @@ $(document).ready(function () {
                 }
                 repos.append(
                     '<div class="column is-6 ' + repo.language + '">' + '\n' +
-                    '<div class="card is-shadowless" id="repo" style="border-left: 3px solid ' + stringToColor(repo.language) + ';">' + '\n' +
+                    '<div class="card is-shadowless" id="repo" style="border-left: 4px solid ' + stringToColor(repo.language) + '80;">' + '\n' +
                     '<div class="card-content">' + '\n' +
                     '<span class="icon card-icon">' + '\n' +
                     icon + '\n' +
