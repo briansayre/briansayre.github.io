@@ -47,12 +47,14 @@ $(document).ready(function () {
     
     $("#viewExp").click(function () {
         $(".dropdown-menu").hide(100);
+        window.scrollTo(0, 0);
         $('#code-section').hide();
         $('#experience-section').show();
     });
 
     $("#viewCode").click(function () {
         $(".dropdown-menu").hide(100);
+        window.scrollTo(0, 0);
         $('#experience-section').hide();
         $('#code-section').show();
     });
