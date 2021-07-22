@@ -1,20 +1,22 @@
+let debug = true;
+
 $(document).ready(function () {
 
     var languages = []
     var languagesFilter = []
     var repos;
-    var stringToColor = function(str) {
+    var stringToColor = function (str) {
         var hash = 0;
         for (var i = 0; i < str.length; i++) {
-          hash = str.charCodeAt(i) + ((hash << 5) - hash);
+            hash = str.charCodeAt(i) + ((hash << 5) - hash);
         }
         var colour = '#';
         for (var i = 0; i < 3; i++) {
-          var value = (hash >> (i * 8)) & 0xFF;
-          colour += ('00' + value.toString(16)).substr(-2);
+            var value = (hash >> (i * 8)) & 0xFF;
+            colour += ('00' + value.toString(16)).substr(-2);
         }
         return colour;
-      }
+    }
 
     $.ajax({
         url: "https://official-joke-api.appspot.com/jokes/programming/random",
@@ -30,17 +32,47 @@ $(document).ready(function () {
     $("#experience, #code").click(function (e) {
         let tab = e.target.innerText.trim();
         if (tab == "Experience") {
-            $('#experience-section').removeClass('hidden');
-            $('#code-section').addClass('hidden');
+            $('#code-section').hide();
+            $('#experience-section').show();
             $('#experience').addClass('selected-tab');
             $('#code').removeClass('selected-tab');
         } else if (tab == "Code") {
-            $('#experience-section').addClass('hidden');
-            $('#code-section').removeClass('hidden');
+            $('#experience-section').hide();
+            $('#code-section').show();
             $('#experience').removeClass('selected-tab');
             $('#code').addClass('selected-tab');
         }
     });
+
+    
+    $("#viewExp").click(function () {
+        $(".dropdown-menu").hide(100);
+        $('#code-section').hide();
+        $('#experience-section').show();
+    });
+
+    $("#viewCode").click(function () {
+        $(".dropdown-menu").hide(100);
+        $('#experience-section').hide();
+        $('#code-section').show();
+    });
+
+    
+    $(document).bind("contextmenu", function (event) {
+        event.preventDefault();
+        $(".dropdown-menu").finish().toggle(100).
+            css({
+                top: event.pageY + "px",
+                left: event.pageX + "px"
+            });
+    });
+
+    $(document).bind("mousedown", function (e) {
+        if (!$(e.target).parents(".dropdown-menu").length > 0) {
+            $(".dropdown-menu").hide(100);
+        }
+    });
+
 
 
     $.ajax({
@@ -49,7 +81,7 @@ $(document).ready(function () {
         success: function (res) {
             repos = $('#repos');
             $.each(res, function (index, repo) {
-                let border="blue-left"
+                let border = "blue-left"
                 if (repo.homepage == "") {
                     repo.homepage = "https://github.com/briansayre"
                 }
@@ -146,6 +178,5 @@ $(document).ready(function () {
             });
         }
     });
-
 
 });
