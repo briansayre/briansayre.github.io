@@ -1,4 +1,4 @@
-let debug = false;
+let debug = true;
 
 $(document).ready(function () {
 
@@ -37,11 +37,19 @@ $(document).ready(function () {
             $('#experience-section').show();
             $('#experience').addClass('selected-tab');
             $('#code').removeClass('selected-tab');
+            $('#experience').addClass('is-active');
+            $('#code').removeClass('is-active');
+            $('#experience').removeClass('white');
+            $('#code').addClass('white');
         } else if (tab == "Code") {
             $('#experience-section').hide();
             $('#code-section').show();
             $('#experience').removeClass('selected-tab');
             $('#code').addClass('selected-tab');
+            $('#experience').removeClass('is-active');
+            $('#code').addClass('is-active');
+            $('#experience').addClass('white');
+            $('#code').removeClass('white');
         }
     });
     
@@ -61,9 +69,13 @@ $(document).ready(function () {
 
     $(document).bind("contextmenu", function (event) {
         if (!debug) event.preventDefault();
+        var top = event.pageY;
+        if ($(window).height() - event.clientY < 300) {
+            top -= 314;
+        }
         $(".dropdown-menu").finish().toggle(100).
             css({
-                top: event.pageY + "px",
+                top: top + "px",
                 left: event.pageX + "px"
             });
     });

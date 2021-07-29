@@ -1,5 +1,5 @@
 body {
-  background-color: #f3f2ef;
+  background-color: rgb(245, 245, 245);
   min-height: 100vh;
   margin: 0;
   padding: 0;
@@ -31,9 +31,24 @@ body {
   color: #363636;
 }
 
+#tabs {
+  border: none;
+}
+
+#tabs .card-footer {
+  border: none;
+}
+
 .selected-tab {
   font-weight: bold;
   color: #485fc7;
+  border-bottom: 4px solid #485fc7;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.selected-tab:active {
+  color: white;
 }
 
 .profile-pic {
@@ -52,6 +67,7 @@ body {
 
 .card {
   margin-bottom: 25px;
+  border: 1px solid #ededed;
 }
 
 .card-content {
