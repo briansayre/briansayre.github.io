@@ -54,9 +54,15 @@ body {
   margin-bottom: 25px;
 }
 
+.card-content {
+  margin-left: 15px;
+}
+
 .card-icon {
   float: right;
-  color: #4a4a4a;
+  color: white;
+  border-radius: 4px;
+  padding: 5px;
 }
 
 .is-size-5 {
@@ -112,24 +118,22 @@ body {
   display: none;
 }
 
-.red-left {
-  border-left: 4px solid rgba(255,0,0,.5);
+.dot {
+  height: 8px;
+  width: 8px;
+  margin: 0px 8px 3px -20px;
+  border-radius: 2px;
+  display: inline-block;
 }
-.orange-left {
-  border-left: 4px solid rgba(252, 134, 0, 0.5);
+
+#red {
+  background-color: #C8102E;
 }
-.yellow-left {
-  border-left: 4px solid rgba(240, 255, 26, 0.5);
+
+#blue {
+  background-color:  #0076BC;
 }
-.green-left {
-  border-left: 4px solid rgba(0, 240, 0, 0.5);
-}
-.blue-left {
-  border-left: 4px solid rgba(33, 0, 218, 0.5);
-}
-.purple-left {
-  border-left: 4px solid rgba(90, 4, 86, 0.5);
-}
-.pink-left {
-  border-left: 4px solid rgba(252, 0, 252, 0.5);
+
+#orange {
+  background-color: #E87722;
 }
