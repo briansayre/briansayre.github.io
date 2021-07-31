@@ -39,8 +39,6 @@ $(document).ready(function () {
             $('#code').removeClass('selected-tab');
             $('#experience').addClass('is-active');
             $('#code').removeClass('is-active');
-            $('#experience').removeClass('white');
-            $('#code').addClass('white');
         } else if (tab == "Code") {
             $('#experience-section').hide();
             $('#code-section').show();
@@ -48,8 +46,6 @@ $(document).ready(function () {
             $('#code').addClass('selected-tab');
             $('#experience').removeClass('is-active');
             $('#code').addClass('is-active');
-            $('#experience').addClass('white');
-            $('#code').removeClass('white');
         }
     });
     
