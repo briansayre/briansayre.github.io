@@ -17,7 +17,7 @@ body {
   left: -25px;
   border-bottom-left-radius: 0.25rem;
   border-bottom-right-radius: 0.25rem;
-  filter: brightness(70%);
+  filter: brightness(60%);
 }
 
 #left-column {
@@ -54,10 +54,6 @@ body {
   border-bottom-right-radius: 4px;
 }
 
-.selected-tab:active {
-  color: white;
-}
-
 .profile-pic {
   border-radius: 0.25rem;
   margin-bottom: 25px;
@@ -73,7 +69,7 @@ body {
 }
 
 .card {
-  margin-bottom: 25px;
+  margin-bottom: 12px;
   border: 1px solid #d6d8da;
 }
 
@@ -128,7 +124,7 @@ body {
   #content {
     margin: 0;
   }
-  
+
 }
 
 .hidden {
