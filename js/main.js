@@ -1,4 +1,4 @@
-let debug = false;
+let debug = true;
 
 $(document).ready(function () {
 
@@ -6,10 +6,6 @@ $(document).ready(function () {
     var languagesFilter = []
     var repos;
     var colors;
-
-    var lookupColor = function (str) {
-        return colors[str].color;
-    }
 
     $.ajax({
         url: "https://raw.githubusercontent.com/ozh/github-colors/master/colors.json",
@@ -20,7 +16,7 @@ $(document).ready(function () {
     });
 
     $.ajax({
-        url: "https://official-joke-api.appspot.com/jokes/programming/random",
+        url: "https://karljoke.herokuapp.com/jokes/programming/random",
         type: 'GET',
         success: function (res) {
             $('#joke').append(
@@ -29,6 +25,14 @@ $(document).ready(function () {
             );
         }
     });
+
+    
+    var lookupColor = function (str) {
+        if (str == null) return "#878787";
+        console.log(str);
+        return colors[str].color;
+    }
+
 
     $("#experience, #code").click(function (e) {
         let tab = e.target.innerText.trim();
