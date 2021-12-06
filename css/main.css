@@ -8,7 +8,7 @@ body {
 #header {
   margin: 0;
   height: 300px;
-  background-image: url("../images/header.JPG");
+  /* background-image: url("../images/header.JPG"); */
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;

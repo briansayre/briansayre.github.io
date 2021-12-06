@@ -29,7 +29,6 @@ $(document).ready(function () {
     
     var lookupColor = function (str) {
         if (str == null) return "#878787";
-        console.log(str);
         return colors[str].color;
     }
 
