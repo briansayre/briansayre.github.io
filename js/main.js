@@ -18,6 +18,8 @@ $(document).ready(function () {
     $.ajax({
         url: "https://karljoke.herokuapp.com/jokes/programming/random",
         type: 'GET',
+        crossDomain: true,
+        dataType: 'jsonp',
         success: function (res) {
             $('#joke').append(
                 '<span class="has-text-weight-semibold"> ' + res[0].setup + '</span> <br>' +
