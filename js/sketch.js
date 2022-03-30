@@ -1,8 +1,8 @@
 
 const WIDTH = 2000;
 const HEIGHT = 500;
-const ROWS = HEIGHT/10;
-const COLS = WIDTH/10;
+const ROWS = HEIGHT / 10;
+const COLS = WIDTH / 10;
 const CELL_SIZE = 10;
 var BG_COLOR;
 var CELL_COLOR;
@@ -21,20 +21,20 @@ function preload() {
 
 function windowResized() {
   var clientHeight = document.getElementById('header').clientHeight;
-	var clientWidth = document.getElementById('header').clientWidth;
+  var clientWidth = document.getElementById('header').clientWidth;
   resizeCanvas(clientWidth, clientHeight);
 }
 
 function setup() {
   paused = 0;
   var clientHeight = document.getElementById('header').clientHeight;
-	var clientWidth = document.getElementById('header').clientWidth;
+  var clientWidth = document.getElementById('header').clientWidth;
   var canvas = createCanvas(clientWidth, clientHeight);
-	canvas.parent("header");
-  BG_COLOR = color(238, 240, 241, 60);
-  CELL_COLOR = color(72, 95, 199, 20);
-  frameRate(5);
-  strokeWeight(2);
+  canvas.parent("header");
+  BG_COLOR = color(238, 240, 241, 100);
+  CELL_COLOR = color(72, 95, 199, 30);
+  frameRate(2);
+  strokeWeight(0);
   background(BG_COLOR);
   stroke(CELL_COLOR);
   for (var i = 0; i < ROWS; i++) {
@@ -46,7 +46,7 @@ function setup() {
   fill(CELL_COLOR);
   for (var i = 0; i < ROWS; i++) {
     for (var j = 0; j < COLS; j++) {
-      if (cells[i][j] == 1) rect(j*CELL_SIZE, i*CELL_SIZE, CELL_SIZE, CELL_SIZE);
+      if (cells[i][j] == 1) rect(j * CELL_SIZE, i * CELL_SIZE, CELL_SIZE, CELL_SIZE);
     }
   }
   image(refreshImg, 0, 0, 20, 20);
@@ -66,7 +66,7 @@ function draw() {
     cells = newCells;
     for (var i = 0; i < ROWS; i++) {
       for (var j = 0; j < COLS; j++) {
-        if (cells[i][j] == 1) rect(j*CELL_SIZE, i*CELL_SIZE, CELL_SIZE);
+        if (cells[i][j] == 1) rect(j * CELL_SIZE, i * CELL_SIZE, CELL_SIZE);
       }
     }
     image(refreshImg, 5, 5, 12, 12);
@@ -76,7 +76,7 @@ function draw() {
     background(BG_COLOR);
     for (var i = 0; i < ROWS; i++) {
       for (var j = 0; j < COLS; j++) {
-        if (cells[i][j] == 1) rect(j*CELL_SIZE, i*CELL_SIZE, CELL_SIZE);
+        if (cells[i][j] == 1) rect(j * CELL_SIZE, i * CELL_SIZE, CELL_SIZE);
       }
     }
     image(refreshImg, 5, 5, 12, 12);
@@ -87,17 +87,17 @@ function draw() {
 
 
 function getCell(x, y) {
-  if (x == -1) x = COLS-1;
+  if (x == -1) x = COLS - 1;
   if (x == COLS) x = 0;
-  if (y == -1) y = ROWS-1;
+  if (y == -1) y = ROWS - 1;
   if (y == ROWS) y = 0;
   return cells[y][x];
 }
 
 function stepGameOfLife(x, y) {
-  var liveNeighbors = getCell(x-1, y-1) + getCell(x, y-1) + getCell(x+1, y-1);
-  liveNeighbors += getCell(x-1, y) + getCell(x+1, y);
-  liveNeighbors += getCell(x-1, y+1) + getCell(x, y+1) + getCell(x+1, y+1);
+  var liveNeighbors = getCell(x - 1, y - 1) + getCell(x, y - 1) + getCell(x + 1, y - 1);
+  liveNeighbors += getCell(x - 1, y) + getCell(x + 1, y);
+  liveNeighbors += getCell(x - 1, y + 1) + getCell(x, y + 1) + getCell(x + 1, y + 1);
   var alive = cells[y][x];
   if (alive == 1 && liveNeighbors < 2) return 0;
   if (alive == 1 && (liveNeighbors == 2 || liveNeighbors == 3)) return 1;

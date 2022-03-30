@@ -1,4 +1,4 @@
-let debug = false;
+let debug = true;
 
 $(document).ready(function () {
 
@@ -11,7 +11,7 @@ $(document).ready(function () {
         url: "https://raw.githubusercontent.com/ozh/github-colors/master/colors.json",
         type: 'GET',
         success: function (res) {
-            colors =  JSON.parse(res);
+            colors = JSON.parse(res);
         }
     });
 
@@ -19,7 +19,6 @@ $(document).ready(function () {
         url: "https://karljoke.herokuapp.com/jokes/programming/random",
         type: 'GET',
         crossDomain: true,
-        dataType: 'jsonp',
         success: function (res) {
             $('#joke').append(
                 '<span class="has-text-weight-semibold"> ' + res[0].setup + '</span> <br>' +
@@ -28,7 +27,7 @@ $(document).ready(function () {
         }
     });
 
-    
+
     var lookupColor = function (str) {
         if (str == null) return "#878787";
         return colors[str].color;
@@ -53,7 +52,7 @@ $(document).ready(function () {
             $('#code').addClass('is-active');
         }
     });
-    
+
     $("#viewExp").click(function () {
         $(".dropdown-menu").hide(100);
         window.scrollTo(0, 0);
