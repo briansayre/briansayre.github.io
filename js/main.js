@@ -1,4 +1,4 @@
-let debug = true;
+let debug = false;
 
 $(document).ready(function () {
 
@@ -101,26 +101,50 @@ $(document).ready(function () {
                 if (!languages.includes(repo.language)) {
                     languages.push(repo.language);
                 }
-                repos.append(
-                    '<div class="column is-6 ' + repo.language + '">' + '\n' +
-                    '<div class="card is-shadowless" id="repo">' + '\n' +
-                    '<div class="card-content">' + '\n' +
-                    '<span class="dot" style="background-color: ' + lookupColor(repo.language) + ';"></span>' + '\n' +
-                    '<span class="is-size-5">' + '\n' +
-                    repo.name + '\n' +
-                    '</span><br>' + '\n' +
-                    '<span><i>' + repo.language + '</i></span><br><br>' + '\n' +
-                    '<span class="content">' + '\n' +
-                    repo.description + '\n' +
-                    '</span>' + '\n' +
-                    '</div>' + '\n' +
-                    '<footer class="card-footer">' + '\n' +
-                    '<a href="' + repo.homepage + '" class="card-footer-item" target="_blank" >View app</a>' + '\n' +
-                    '<a href="' + repo.html_url + '" class="card-footer-item" target="_blank" >View code</a>' + '\n' +
-                    '</footer>' + '\n' +
-                    '</div>' + '\n' +
-                    '</div>' + '\n'
-                );
+                console.log(repo.homepage)
+                if (repo.homepage && repo.homepage != "https://github.com/briansayre") {
+                    repos.append(
+                        '<div class="column is-6 ' + repo.language + '">' + '\n' +
+                        '<div class="card is-shadowless" id="repo">' + '\n' +
+                        '<div class="card-content">' + '\n' +
+                        '<span class="dot" style="background-color: ' + lookupColor(repo.language) + ';"></span>' + '\n' +
+                        '<span class="is-size-5">' + '\n' +
+                        repo.name + '\n' +
+                        '</span><br>' + '\n' +
+                        '<span><i>' + repo.language + '</i></span><br><br>' + '\n' +
+                        '<span class="content">' + '\n' +
+                        repo.description + '\n' +
+                        '</span>' + '\n' +
+                        '</div>' + '\n' +
+                        '<footer class="card-footer">' + '\n' +
+                        '<a href="' + repo.homepage + '" class="card-footer-item" target="_blank" >View app</a>' + '\n' +
+                        '<a href="' + repo.html_url + '" class="card-footer-item" target="_blank" >View code</a>' + '\n' +
+                        '</footer>' + '\n' +
+                        '</div>' + '\n' +
+                        '</div>' + '\n'
+                    );
+                } else {
+                    repos.append(
+                        '<div class="column is-6 ' + repo.language + '">' + '\n' +
+                        '<div class="card is-shadowless" id="repo">' + '\n' +
+                        '<div class="card-content">' + '\n' +
+                        '<span class="dot" style="background-color: ' + lookupColor(repo.language) + ';"></span>' + '\n' +
+                        '<span class="is-size-5">' + '\n' +
+                        repo.name + '\n' +
+                        '</span><br>' + '\n' +
+                        '<span><i>' + repo.language + '</i></span><br><br>' + '\n' +
+                        '<span class="content">' + '\n' +
+                        repo.description + '\n' +
+                        '</span>' + '\n' +
+                        '</div>' + '\n' +
+                        '<footer class="card-footer">' + '\n' +
+                        '<a href="' + repo.html_url + '" class="card-footer-item" target="_blank" >View code</a>' + '\n' +
+                        '</footer>' + '\n' +
+                        '</div>' + '\n' +
+                        '</div>' + '\n'
+                    );
+                }
+                
             })
 
             tags = $('.tags');
