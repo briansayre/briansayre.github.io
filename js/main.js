@@ -15,7 +15,7 @@ $(document).ready(function () {
         }
     });
 
-    
+
     $.ajax({
         url: "https://xkcd.com/info.0.json",
         type: 'GET',
@@ -108,7 +108,6 @@ $(document).ready(function () {
                 if (!languages.includes(repo.language)) {
                     languages.push(repo.language);
                 }
-                console.log(repo.homepage)
                 if (repo.homepage && repo.homepage != "https://github.com/briansayre") {
                     repos.append(
                         '<div class="column is-6 ' + repo.language + '">' + '\n' +
