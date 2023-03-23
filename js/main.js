@@ -15,16 +15,18 @@ $(document).ready(function () {
         }
     });
 
-    
     $.ajax({
         url: "https://xkcd.com/",
         type: 'GET',
         dataType: 'html',
+        crossDomain: true,
         headers: {
             'Access-Control-Allow-Origin': '*'
         },
         success: function (res) {
-            console.log(res)
+            console.log('______________________________________');
+            console.log(res);
+            console.log('______________________________________');
             $('#joke').append(
                 '<span class="has-text-weight-semibold"> ' + res[0].setup + '</span> <br>' +
                 '<br><span> ' + res[0].punchline + '</span>'
