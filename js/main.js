@@ -15,11 +15,16 @@ $(document).ready(function () {
         }
     });
 
+    
     $.ajax({
-        url: "https://karljoke.herokuapp.com/jokes/programming/random",
+        url: "https://xkcd.com/",
         type: 'GET',
-        crossDomain: true,
+        dataType: 'html',
+        headers: {
+            'Access-Control-Allow-Origin': '*'
+        },
         success: function (res) {
+            console.log(res)
             $('#joke').append(
                 '<span class="has-text-weight-semibold"> ' + res[0].setup + '</span> <br>' +
                 '<br><span> ' + res[0].punchline + '</span>'
