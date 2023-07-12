@@ -41,21 +41,20 @@
     </style>
 </head>
 
-<body>
+<body class="has-background-dark is-family-monospace">
     <div class="container">
-        <div id="header"> </div>
         <div id="content" class="columns">
-            <div class="column is-3 is-10-mobile is-offset-1-mobile" id="left-column">
-                <div id="pic">
+            <div class="column is-10 is-offset-1" id="left-column">
+                <!-- <div id="pic">
                     <img class="profile-pic" id="img" src="https://avatars.githubusercontent.com/u/19983462" />
-                </div>
+                </div> -->
                 <div id="info">
-                    <h1 class="title">
+                    <h1 class="title is-size-1 has-text-light">
                         Brian Sayre
                     </h1>
-                    <p class="subtitle">
+                    <h1 class="is-size-4 has-text-light">
                         Software Developer
-                    </p>
+                    </h1>
                 </div>
                 <div id="links">
                     <a href="https://github.com/briansayre" class="button is-link" target="_blank">
@@ -64,14 +63,12 @@
                         </span>
                         <span>GitHub</span>
                     </a>
-                    <br>
                     <a href="https://www.linkedin.com/in/brian-sayre" class="button is-link" target="_blank">
                         <span class="icon">
                             <i class="fab fa-linkedin-in"></i>
                         </span>
                         <span>LinkedIn</span>
                     </a>
-                    <br>
                     <a href="https://github.com/briansayre/resume/blob/master/resume.pdf" class="button is-link"
                         target="_blank">
                         <span class="icon">
@@ -79,7 +76,6 @@
                         </span>
                         <span>Resume</span>
                     </a>
-                    <br>
                     <a href="https://www.buymeacoffee.com/briansayre" class="button is-link" target="_blank">
                         <span class="icon">
                             <i class="fas fa-coffee"></i>
@@ -93,30 +89,12 @@
                         <span>Contact me</span>
                     </a>
                 </div>
-            </div>
-            <div class="column is-12-mobile" id="right-column">
-                <div class="card is-shadowless" id="tabs">
-                    <footer class="card-footer">
-                        <a href="javascript:void(0);" id="experience" class="card-footer-item selected-tab">
-                            <span class="icon">
-                                <i class="fas fa-briefcase"></i>
-                            </span>&nbsp;
-                            <span> Experience</span>
-                        </a>
-                        <a href="javascript:void(0);" id="code" class="card-footer-item">
-                            <span class="icon">
-                                <i class="fas fa-code"></i>
-                            </span>&nbsp;
-                            <span> Code</span>
-                        </a>
-                    </footer>
-                </div>
-                <section class="" id="experience-section">
-                    <div class="card is-shadowless">
+                <section id="experience-section">
+                    <h1 class="is-size-3 has-text-light">
+                        Experience
+                    </h1>
+                    <div class="card has-background-dark has-text-light	is-shadowless">
                         <div class="card-content">
-                            <!-- <span class="icon card-icon" id="orange">
-                                <i class="fas fa-briefcase" aria-hidden="true"></i>
-                            </span> -->
                             <span class="dot" id="red"></span>
                             <span class="is-size-5">
                                 Software Developer
@@ -129,11 +107,8 @@
                             </span>
                         </div>
                     </div>
-                    <div class="card is-shadowless">
+                    <div class="card has-background-dark has-text-light	is-shadowless">
                         <div class="card-content ">
-                            <!-- <span class="icon card-icon" id="red">
-                                <i class="fas fa-graduation-cap"></i>
-                            </span> -->
                             <span class="dot" id="yellow"></span>
                             <span class="is-size-5">
                                 Software Engineering Major
@@ -148,11 +123,8 @@
                             </span>
                         </div>
                     </div>
-                    <div class="card is-shadowless">
+                    <div class="card has-background-dark has-text-light	is-shadowless">
                         <div class="card-content">
-                            <!-- <span class="icon card-icon" id="orange">
-                                <i class="fas fa-briefcase" aria-hidden="true"></i>
-                            </span> -->
                             <span class="dot" id="orange"></span>
                             <span class="is-size-5">
                                 Software Engineer Intern
@@ -171,11 +143,8 @@
                             </span>
                         </div>
                     </div>
-                    <div class="card is-shadowless">
+                    <div class="card has-background-dark has-text-light	is-shadowless">
                         <div class="card-content">
-                            <!-- <span class="icon card-icon" id="blue">
-                                <i class="fas fa-briefcase" aria-hidden="true"></i>
-                            </span> -->
                             <span class="dot" id="blue"></span>
                             <span class="is-size-5">
                                 Software Engineer Intern
@@ -196,11 +165,8 @@
                             </span>
                         </div>
                     </div>
-                    <div class="card is-shadowless">
+                    <div class="card has-background-dark has-text-light	is-shadowless">
                         <div class="card-content">
-                            <!-- <span class="icon card-icon" id="red">
-                                <i class="fas fa-briefcase" aria-hidden="true"></i>
-                            </span> -->
                             <span class="dot" id="yellow"></span>
                             <span class="is-size-5">
                                 Software Engineering Learning Community Peer Mentor
@@ -223,13 +189,12 @@
                         </div>
                     </div>
                 </section>
-                <section class="hidden" id="code-section">
-                    <div class="columns is-multiline" id="repos">
-                        <div class="column is-12">
-                            <div class="tags are-medium">
-
-                            </div>
-                        </div>
+                <section id="code-section">
+                    <h1 class="is-size-3 has-text-light">
+                        Code
+                    </h1>
+                    <div id="repos">
+                        <div class="tags are-medium"> </div>
                     </div>
                 </section>
             </div>
@@ -237,12 +202,6 @@
     </div>
     <div class="dropdown-menu" id="dropdown-menu" role="menu">
         <div class="dropdown-content">
-            <a href="javascript:void(0);" id="viewExp" class="dropdown-item">
-                <span>View my experience</span>
-            </a>
-            <a href="javascript:void(0);" id="viewCode" class="dropdown-item">
-                <span>View my code</span>
-            </a>
             <hr class="dropdown-divider">
             <a href="https://github.com/briansayre" class="dropdown-item" target="_blank">
                 <span>GitHub</span>
@@ -267,9 +226,5 @@
         </div>
     </div>
 </body>
-<footer class="footer">
-    <div id="xkcd" class="content has-text-centered">
-    </div>
-</footer>
 
 </html>

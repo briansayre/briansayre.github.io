@@ -110,42 +110,34 @@ $(document).ready(function () {
                 }
                 if (repo.homepage && repo.homepage != "https://github.com/briansayre") {
                     repos.append(
-                        '<div class="column is-6 ' + repo.language + '">' + '\n' +
-                        '<div class="card is-shadowless" id="repo">' + '\n' +
+                        '<div class="card is-shadowless has-background-dark has-text-light ' + repo.language + '" id="repo">' + '\n' +
                         '<div class="card-content">' + '\n' +
                         '<span class="dot" style="background-color: ' + lookupColor(repo.language) + ';"></span>' + '\n' +
                         '<span class="is-size-5">' + '\n' +
                         repo.name + '\n' +
                         '</span><br>' + '\n' +
-                        '<span><i>' + repo.language + '</i></span><br><br>' + '\n' +
-                        '<span class="content">' + '\n' +
+                        ((repo.language == null) ? '' : '<span><i>' + repo.language + '</i></span>') + '\n' +
+                        '<span class="content"><br>' + '\n' +
                         repo.description + '\n' +
+                        '<a href="' + repo.homepage + '" class="" target="_blank" >View app</a>' + '\n' +
+                        '<a href="' + repo.html_url + '" class="" target="_blank" >View code</a>' + '\n' +
                         '</span>' + '\n' +
-                        '</div>' + '\n' +
-                        '<footer class="card-footer">' + '\n' +
-                        '<a href="' + repo.homepage + '" class="card-footer-item" target="_blank" >View app</a>' + '\n' +
-                        '<a href="' + repo.html_url + '" class="card-footer-item" target="_blank" >View code</a>' + '\n' +
-                        '</footer>' + '\n' +
                         '</div>' + '\n' +
                         '</div>' + '\n'
                     );
                 } else {
                     repos.append(
-                        '<div class="column is-6 ' + repo.language + '">' + '\n' +
-                        '<div class="card is-shadowless" id="repo">' + '\n' +
+                        '<div class="card is-shadowless has-background-dark has-text-light ' + repo.language + '" id="repo">' + '\n' +
                         '<div class="card-content">' + '\n' +
                         '<span class="dot" style="background-color: ' + lookupColor(repo.language) + ';"></span>' + '\n' +
                         '<span class="is-size-5">' + '\n' +
                         repo.name + '\n' +
                         '</span><br>' + '\n' +
-                        '<span><i>' + repo.language + '</i></span><br><br>' + '\n' +
-                        '<span class="content">' + '\n' +
+                        ((repo.language == null) ? '' : '<span><i>' + repo.language + '</i></span>') + '\n' +
+                        '<span class="content"><br>' + '\n' +
                         repo.description + '\n' +
+                        '<a href="' + repo.html_url + '" class="" target="_blank" >View code</a>' + '\n' +
                         '</span>' + '\n' +
-                        '</div>' + '\n' +
-                        '<footer class="card-footer">' + '\n' +
-                        '<a href="' + repo.html_url + '" class="card-footer-item" target="_blank" >View code</a>' + '\n' +
-                        '</footer>' + '\n' +
                         '</div>' + '\n' +
                         '</div>' + '\n'
                     );

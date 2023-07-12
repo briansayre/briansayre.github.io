@@ -1,6 +1,6 @@
 
-const WIDTH = 2000;
-const HEIGHT = 500;
+const WIDTH = 5000;
+const HEIGHT = 5000;
 const ROWS = HEIGHT / 10;
 const COLS = WIDTH / 10;
 const CELL_SIZE = 10;
@@ -32,7 +32,7 @@ function setup() {
   var canvas = createCanvas(clientWidth, clientHeight);
   canvas.parent("header");
   BG_COLOR = color(238, 240, 241, 100);
-  CELL_COLOR = color(72, 95, 199, 30);
+  CELL_COLOR = color(72, 95, 199, 100);
   frameRate(2);
   strokeWeight(0);
   background(BG_COLOR);
