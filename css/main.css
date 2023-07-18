@@ -1,22 +1,44 @@
-body {
-  min-height: 100vh;
-  margin: 0;
-  padding: 0; 
+body,
+html {
+    height: 100%;
 }
 
-@media (max-width: 669px) {}
+.columns {
+    min-height: 100vh;
+    overflow: hidden;
+}
 
 #profile-pic {
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    transition: 0.3s ease-in-out 0s;
 }
 
-.hidden {
-  display: none;
+#profile-pic:hover {
+    transform: scale(1.05);
+    background: #fff;
+    color: #000;
 }
 
-a {
-  width: 100%;
-  margin-bottom: 15px;
+#canvas {
+    max-height: 100vh;
+    z-index: -1;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.button {
+    transition: 0.3s ease-in-out 0s;
+}
+
+.button:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    background: #fff;
+    color: #000;
 }
