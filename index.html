@@ -30,199 +30,73 @@
     <script src="libraries/p5.min.js" type="text/javascript"></script>
     <script src="js/sketch.js" type="text/javascript"></script>
     <style>
-        body {
-            padding: 0;
-            margin: 0;
-        }
-
         canvas {
             vertical-align: top;
         }
     </style>
 </head>
 
-<body class="has-background-dark is-family-monospace">
+<body class="has-background-dark">
     <div class="container">
-        <div id="content" class="columns">
-            <div class="column is-10 is-offset-1" id="left-column">
-                <!-- <div id="pic">
-                    <img class="profile-pic" id="img" src="https://avatars.githubusercontent.com/u/19983462" />
-                </div> -->
-                <div id="info">
-                    <h1 class="title is-size-1 has-text-light">
+        <div class="columns">
+            <div class="column is-4 is-offset-4 has-text-centered">
+                <div class="card mt-6 p-6">
+                    <div id="pic">
+                        <img id="profile-pic" src="https://avatars.githubusercontent.com/u/19983462" />
+                    </div>
+                    <h1 class="is-size-2">
                         Brian Sayre
                     </h1>
-                    <h1 class="is-size-4 has-text-light">
+                    <h1 class="is-size-5 mb-6">
                         Software Developer
                     </h1>
+                    <div id="links">
+                        <div>
+                            <a href="https://github.com/briansayre" class="button is-info mb-4" target="_blank">
+                                <span class="icon">
+                                    <i class="fab fa-github"></i>
+                                </span>
+                                <span>GitHub</span>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="https://www.linkedin.com/in/brian-sayre" class="button is-info mb-4"
+                                target="_blank">
+                                <span class="icon">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </span>
+                                <span>LinkedIn</span>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="https://github.com/briansayre/resume/blob/master/resume.pdf"
+                                class="button is-info mb-4" target="_blank">
+                                <span class="icon">
+                                    <i class="fas fa-file-alt"></i>
+                                </span>
+                                <span>Resume</span>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="https://www.buymeacoffee.com/briansayre" class="button is-info mb-4"
+                                target="_blank">
+                                <span class="icon">
+                                    <i class="fas fa-coffee"></i>
+                                </span>
+                                <span>Buy me a coffee</span>
+                            </a>
+                        </div>
+                        <div>
+                            <a href="mailto:briansayre01@gmail.com" class="button is-info mb-4" target="_blank">
+                                <span class="icon">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <span>Contact me</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
-                <div id="links">
-                    <a href="https://github.com/briansayre" class="button is-link" target="_blank">
-                        <span class="icon">
-                            <i class="fab fa-github"></i>
-                        </span>
-                        <span>GitHub</span>
-                    </a>
-                    <a href="https://www.linkedin.com/in/brian-sayre" class="button is-link" target="_blank">
-                        <span class="icon">
-                            <i class="fab fa-linkedin-in"></i>
-                        </span>
-                        <span>LinkedIn</span>
-                    </a>
-                    <a href="https://github.com/briansayre/resume/blob/master/resume.pdf" class="button is-link"
-                        target="_blank">
-                        <span class="icon">
-                            <i class="fas fa-file-alt"></i>
-                        </span>
-                        <span>Resume</span>
-                    </a>
-                    <a href="https://www.buymeacoffee.com/briansayre" class="button is-link" target="_blank">
-                        <span class="icon">
-                            <i class="fas fa-coffee"></i>
-                        </span>
-                        <span>Buy me a coffee</span>
-                    </a>
-                    <a href="mailto:briansayre01@gmail.com" class="button is-link" target="_blank">
-                        <span class="icon">
-                            <i class="fas fa-envelope"></i>
-                        </span>
-                        <span>Contact me</span>
-                    </a>
-                </div>
-                <section id="experience-section">
-                    <h1 class="is-size-3 has-text-light">
-                        Experience
-                    </h1>
-                    <div class="card has-background-dark has-text-light	is-shadowless">
-                        <div class="card-content">
-                            <span class="dot" id="red"></span>
-                            <span class="is-size-5">
-                                Software Developer
-                            </span> <br>
-                            <span>Epic Systems Corporation, Verona, Wisconsin</span><br>
-                            <i><span>July 2022 - Present</span></i>
-                            <span class="content">
-                                <ul>
-                                </ul>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="card has-background-dark has-text-light	is-shadowless">
-                        <div class="card-content ">
-                            <span class="dot" id="yellow"></span>
-                            <span class="is-size-5">
-                                Software Engineering Major
-                            </span> <br>
-                            <span>Iowa State University, Ames, Iowa</span><br>
-                            <i><span>August 2018 - May 2022</span></i>
-                            <span class="content">
-                                <ul>
-                                    <li>Data Science minor</li>
-                                    <li>3.87 / 4.0 GPA</li>
-                                </ul>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="card has-background-dark has-text-light	is-shadowless">
-                        <div class="card-content">
-                            <span class="dot" id="orange"></span>
-                            <span class="is-size-5">
-                                Software Engineer Intern
-                            </span> <br>
-                            <span>Optum - UnitedHealth Group, Eden Prairie, Minnesota</span><br>
-                            <i><span>May 2021 - August 2021</span></i>
-                            <span class="content">
-                                <ul>
-                                    <li>Performed maintenance and bug fixes within Optum's FLEX Platform project to
-                                        ensure high quality code </li>
-                                    <li>Implemented a new pipeline for data validation and transformation using HL7's
-                                        FHIR standards </li>
-                                    <li>Developed web app using Vue.js and Spring Boot to aid engineers develop and test
-                                        Liquid templates</li>
-                                </ul>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="card has-background-dark has-text-light	is-shadowless">
-                        <div class="card-content">
-                            <span class="dot" id="blue"></span>
-                            <span class="is-size-5">
-                                Software Engineer Intern
-                            </span> <br>
-                            <span>Principal Financial Group, Des Moines, Iowa</span><br>
-                            <i><span>May 2020 - August 2020</span></i>
-                            <span class="content">
-                                <ul>
-                                    <li>Created a proof-of-concept for an internal chatbot for Principal's
-                                        employees
-                                        to use</li>
-                                    <li> Developed using the AWS Cloud Development Kit written in Python</li>
-                                    <li> Worked with a team of six interns practicing Scrum agile development
-                                    </li>
-                                    <li> Winner of PFG Summer Code Jam/Hackathon out of 15 other intern teams
-                                    </li>
-                                </ul>
-                            </span>
-                        </div>
-                    </div>
-                    <div class="card has-background-dark has-text-light	is-shadowless">
-                        <div class="card-content">
-                            <span class="dot" id="yellow"></span>
-                            <span class="is-size-5">
-                                Software Engineering Learning Community Peer Mentor
-                            </span><br>
-                            <span>Iowa State University, Ames, Iowa</span><br>
-                            <i><span>August 2019 - May 2022</span></i>
-                            <span class="content">
-                                <ul>
-                                    <li>Host office hours and labs for an introduction to C programming course
-                                        for
-                                        freshman in the fall</li>
-                                    <li>Teach a project-based software course for freshman in the spring</li>
-                                    <li>Facilitate study groups, workshops, and social events for the learning
-                                        community</li>
-                                    <li>Assist with questions about ISU, transitioning to college life, and
-                                        the
-                                        Software Engineering major</li>
-                                </ul>
-                            </span>
-                        </div>
-                    </div>
-                </section>
-                <section id="code-section">
-                    <h1 class="is-size-3 has-text-light">
-                        Code
-                    </h1>
-                    <div id="repos">
-                        <div class="tags are-medium"> </div>
-                    </div>
-                </section>
             </div>
-        </div>
-    </div>
-    <div class="dropdown-menu" id="dropdown-menu" role="menu">
-        <div class="dropdown-content">
-            <hr class="dropdown-divider">
-            <a href="https://github.com/briansayre" class="dropdown-item" target="_blank">
-                <span>GitHub</span>
-            </a>
-            <a href="https://www.linkedin.com/in/brian-sayre" class="dropdown-item" target="_blank">
-                <span>LinkedIn</span>
-            </a>
-            <a href="https://github.com/briansayre/resume/blob/master/resume.pdf" class="dropdown-item" target="_blank">
-                <span>Resume</span>
-            </a>
-            <a href="https://www.buymeacoffee.com/briansayre" class="dropdown-item" target="_blank">
-                <span>Buy me a coffee</span>
-            </a>
-            <a href="mailto:briansayre01@gmail.com" class="dropdown-item" target="_blank">
-                <span>Contact me</span>
-            </a>
-            <hr class="dropdown-divider">
-            <a data-action="first" href="https://github.com/briansayre/briansayre.github.io" target="_blank"
-                class="dropdown-item">
-                View website code
-            </a>
         </div>
     </div>
 </body>

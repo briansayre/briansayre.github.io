@@ -1,41 +1,22 @@
 body {
   min-height: 100vh;
   margin: 0;
-  padding: 0;
+  padding: 0; 
 }
 
-@media (max-width: 669px) {
-  
-}
+@media (max-width: 669px) {}
 
-.card {
-  margin: 0;
+#profile-pic {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
 }
 
 .hidden {
   display: none;
 }
 
-.dot {
-  height: 8px;
-  width: 8px;
-  margin: 0px 8px 3px -20px;
-  border-radius: 2px;
-  display: inline-block;
-}
-
-#red {
-  background-color: #C8102E;
-}
-
-#blue {
-  background-color:  #0076BC;
-}
-
-#orange {
-  background-color: #E87722;
-}
-
-#yellow {
-  background-color: #ddd122;
+a {
+  width: 100%;
+  margin-bottom: 15px;
 }
