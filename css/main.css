@@ -1,12 +1,12 @@
 body,
 html {
-    height: 100%;
     background-color: rgb(54, 54, 54);
+    margin: 0;
+    padding: 0;
 }
 
 .columns {
     min-height: 100vh;
-    overflow: hidden;
 }
 
 .card {
