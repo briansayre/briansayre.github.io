@@ -79,10 +79,10 @@ function stepGameOfLife(x, y) {
 }
 
 function calcFill(x, y, prev) {
-  if (inRange(x, mouseX, 30) && inRange(y, mouseY, 30)) return color(0, 0, 0, 30-prev);
-  if (inRange(x, mouseX, 50) && inRange(y, mouseY, 50)) return color(0, 0, 0, 25-prev);
-  if (inRange(x, mouseX, 100) && inRange(y, mouseY, 100)) return color(0, 0, 0, 15-prev);
-  return color(0, 0, 0, 10-prev);
+  if (inRange(x, mouseX, 30) && inRange(y, mouseY, 30)) return color(0, 0, 0, 40-prev);
+  if (inRange(x, mouseX, 50) && inRange(y, mouseY, 50)) return color(0, 0, 0, 30-prev);
+  if (inRange(x, mouseX, 100) && inRange(y, mouseY, 100)) return color(0, 0, 0, 25-prev);
+  return color(0, 0, 0, 15-prev);
 }
 
 function inRange(a, b, r) {
