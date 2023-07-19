@@ -25,7 +25,7 @@ function setup() {
     BG_COLOR = color(54, 54, 54);
     var canvas = createCanvas(windowWidth, windowHeight);
     canvas.parent("canvas");
-    frameRate(10);
+    frameRate(5);
     strokeWeight(0);
     background(BG_COLOR);
     for (var i = 0; i < ROWS; i++) {
@@ -60,9 +60,10 @@ function draw() {
     cells = newCells;
     for (var i = 0; i < ROWS; i++) {
         for (var j = 0; j < COLS; j++) {
-            fill(calcFill(j * CELL_SIZE, i * CELL_SIZE, 8));
-            if (prevCells[i][j] == 1) circle(j * CELL_SIZE, i * CELL_SIZE, CELL_SIZE);
-            fill(calcFill(j * CELL_SIZE, i * CELL_SIZE, 0));
+            // fill(calcFill(j * CELL_SIZE, i * CELL_SIZE, 20));
+            // if (prevCells[i][j] == 1) circle(j * CELL_SIZE, i * CELL_SIZE, CELL_SIZE);
+            // fill(calcFill(j * CELL_SIZE, i * CELL_SIZE, 0));
+            fill(color(10,10,10, 20));
             if (cells[i][j] == 1) circle(j * CELL_SIZE, i * CELL_SIZE, CELL_SIZE);
         }
     }
@@ -89,10 +90,13 @@ function stepGameOfLife(x, y) {
 }
 
 function calcFill(x, y, prev) {
-    if (inRange(x, mouseX, 30) && inRange(y, mouseY, 30)) return color(0, 0, 0, 40 - prev);
-    if (inRange(x, mouseX, 50) && inRange(y, mouseY, 50)) return color(0, 0, 0, 30 - prev);
-    if (inRange(x, mouseX, 100) && inRange(y, mouseY, 100)) return color(0, 0, 0, 25 - prev);
-    return color(0, 0, 0, 15 - prev);
+    var r = 10;
+    var g = 10;
+    var b = 10;
+    if (inRange(x, mouseX, 30) && inRange(y, mouseY, 30)) return color(r, g, b, 100 - prev);
+    if (inRange(x, mouseX, 50) && inRange(y, mouseY, 50)) return color(r, g, b, 70 - prev);
+    if (inRange(x, mouseX, 100) && inRange(y, mouseY, 100)) return color(r, g, b, 50 - prev);
+    return color(r, g, b, 30 - prev);
 }
 
 function inRange(a, b, r) {
