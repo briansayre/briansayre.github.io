@@ -7,9 +7,15 @@ var PREV_CELL_COLOR;
 var cells = [];
 var prevCells = [];
 var canvas;
+var leftPressed = false;
+
+function mouseClicked() {
+    if (mouseButton === LEFT) {
+        leftPressed = true;
+    }
+}
 
 function windowResized() {
-    console.log(windowWidth, windowHeight);
     resizeCanvas(windowWidth, windowHeight);
 }
 
@@ -37,6 +43,10 @@ function setup() {
 }
 
 function draw() {
+    if (leftPressed) {
+        leftPressed = false;
+        setup();
+    }
     clear();
     background(BG_COLOR);
     var newCells = [];
@@ -79,12 +89,12 @@ function stepGameOfLife(x, y) {
 }
 
 function calcFill(x, y, prev) {
-  if (inRange(x, mouseX, 30) && inRange(y, mouseY, 30)) return color(0, 0, 0, 40-prev);
-  if (inRange(x, mouseX, 50) && inRange(y, mouseY, 50)) return color(0, 0, 0, 30-prev);
-  if (inRange(x, mouseX, 100) && inRange(y, mouseY, 100)) return color(0, 0, 0, 25-prev);
-  return color(0, 0, 0, 15-prev);
+    if (inRange(x, mouseX, 30) && inRange(y, mouseY, 30)) return color(0, 0, 0, 40 - prev);
+    if (inRange(x, mouseX, 50) && inRange(y, mouseY, 50)) return color(0, 0, 0, 30 - prev);
+    if (inRange(x, mouseX, 100) && inRange(y, mouseY, 100)) return color(0, 0, 0, 25 - prev);
+    return color(0, 0, 0, 15 - prev);
 }
 
 function inRange(a, b, r) {
-  return Math.abs(a-b)<=r;
+    return Math.abs(a - b) <= r;
 }
