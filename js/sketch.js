@@ -17,6 +17,8 @@ function mouseClicked() {
 
 function windowResized() {
     resizeCanvas(windowWidth, windowHeight);
+    ROWS = Math.ceil(windowHeight / CELL_SIZE);
+    COLS = Math.ceil(windowWidth / CELL_SIZE);
 }
 
 function setup() {
