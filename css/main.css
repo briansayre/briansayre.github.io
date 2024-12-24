@@ -1,12 +1,15 @@
 body,
 html {
-    background-color: rgb(54, 54, 54);
     margin: 0;
     padding: 0;
+    background-color: #afafaf;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 .columns {
     min-height: 100vh;
+    max-height: 100vh;
 }
 
 .card {
@@ -21,29 +24,13 @@ html {
     cursor: pointer;
     transform: scale(1.05);
     background: #fff;
-    color: #000;
 }
 
 #profile-pic {
-    height: 150px;
-    width: 150px;
-    border-radius: 50%;
+    border-radius: 0.25rem;
     transition: 0.3s ease-in-out 0s;
 }
 
 #profile-pic:hover {
     transform: scale(1.05);
-    background: #fff;
-    color: #000;
-}
-
-#canvas {
-    max-height: 100vh;
-    z-index: 0;
-    overflow: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 0;
-    padding: 0;
 }

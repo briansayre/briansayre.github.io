@@ -1,110 +1,113 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-N1Q4HZ9S35"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {
-                dataLayer.push(arguments);
-            }
-            gtag("js", new Date());
-            gtag("config", "G-N1Q4HZ9S35");
-        </script>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Brian Sayre's personal website." />
-        <meta name="keywords" content="Brian, Sayre" />
-        <meta name="author" content="Brian Sayre" />
-        <title>Brian Sayre</title>
-        <link rel="stylesheet" href="css/main.css" />
-        <link rel="stylesheet" href="css/all.min.css" />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
-        <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png" />
-        <link rel="manifest" href="./favicon/site.webmanifest" />
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
-        <script src="js/sketch.js" type="text/javascript"></script>
-    </head>
 
-    <body>
-        <div class="container has-text-black">
-            <div class="columns is-vcentered has-text-centered is-mobile is-centered">
-                <div class="column is-11-mobile is-8-tablet is-4-desktop">
-                    <div class="card p-6">
-                        <div class="mb-2" id="pic">
-                            <img id="profile-pic" src="https://avatars.githubusercontent.com/u/19983462" />
-                        </div>
-                        <p class="title is-1">Brian Sayre</p>
-                        <p class="subtitle is-5 mb-5">Software Developer</p>
-                        <div id="links">
-                            <div>
-                                <a
-                                    href="https://github.com/briansayre"
-                                    class="button is-fullwidth is-link mb-5 is-outlined"
-                                    target="_blank"
-                                >
-                                    <span class="icon">
-                                        <i class="fab fa-github"></i>
-                                    </span>
-                                    <span>GitHub</span>
-                                </a>
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-N1Q4HZ9S35"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+        gtag("config", "G-N1Q4HZ9S35");
+    </script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Brian Sayre's personal website." />
+    <meta name="keywords" content="Brian, Sayre" />
+    <meta name="author" content="Brian Sayre" />
+    <title>Brian Sayre</title>
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png" />
+    <link rel="manifest" href="./favicon/site.webmanifest" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
+    <script src="./js/sketch.js"></script>
+</head>
+
+<body>
+    <div class="container has-text-black">
+        <div class="columns is-vcentered is-mobile is-centered">
+            <div class="column is-10-mobile is-8-tablet is-6-desktop">
+                <div>
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="media">
+                                <div class="media-left">
+                                    <figure class="image is-48x48">
+                                        <img id="profile-pic" src="https://avatars.githubusercontent.com/u/19983462" />
+                                    </figure>
+                                </div>
+                                <div class="media-content">
+                                    <p class="title is-4">Brian Sayre</p>
+                                    <p class="subtitle is-6">Software Developer</p>
+                                </div>
                             </div>
-                            <div>
-                                <a
-                                    href="https://www.linkedin.com/in/brian-sayre"
-                                    class="button is-fullwidth is-link mb-5 is-outlined"
-                                    target="_blank"
-                                >
-                                    <span class="icon">
-                                        <i class="fab fa-linkedin-in"></i>
-                                    </span>
-                                    <span>LinkedIn</span>
-                                </a>
-                            </div>
-                            <div>
-                                <a
-                                    href="https://github.com/briansayre/resume/blob/master/resume.pdf"
-                                    class="button is-fullwidth is-link mb-5 is-outlined"
-                                    target="_blank"
-                                >
-                                    <span class="icon">
-                                        <i class="fas fa-file-alt"></i>
-                                    </span>
-                                    <span>Resume</span>
-                                </a>
-                            </div>
-                            <div>
-                                <a
-                                    href="https://www.buymeacoffee.com/briansayre"
-                                    class="button is-fullwidth is-link mb-5 is-outlined"
-                                    target="_blank"
-                                >
-                                    <span class="icon">
-                                        <i class="fas fa-coffee"></i>
-                                    </span>
-                                    <span>Buy me a coffee</span>
-                                </a>
-                            </div>
-                            <div>
-                                <a
-                                    href="mailto:briansayre01@gmail.com"
-                                    class="button is-fullwidth is-link is-outlined"
-                                    target="_blank"
-                                >
-                                    <span class="icon">
-                                        <i class="fas fa-envelope"></i>
-                                    </span>
-                                    <span>Contact me</span>
-                                </a>
+
+                            <div class="content">
+                                <p>
+                                    <button class="button">
+                                        <a href="https://github.com/briansayre" target="_blank">
+                                            <span class="icon is-small">
+                                                <i class="fab fa-github"></i>
+                                            </span>
+                                        </a>
+                                    </button>
+                                    <button class="button">
+                                        <a href="https://www.linkedin.coms/in/brian-sayre" target="_blank">
+                                            <span class="icon is-small">
+                                                <i class="fab fa-linkedin-in"></i>
+                                            </span>
+                                        </a>
+                                    </button>
+                                    <button class="button">
+                                        <a href="mailto:briansayre01@gmail.com" target="_blank">
+                                            <span class="icon is-small">
+                                                <i class="fas fa-envelope"></i>
+                                            </span>
+                                        </a>
+                                    </button>
+                                </p>
+                                <h6>Projects</h6>
+                                <p>
+                                    <a href="https://briansayre.com/scores" target="_blank">
+                                        <span>Scores</span>
+                                    </a>/
+                                    <a href="https://briansayre.com/recipes" target="_blank">
+                                        <span>Recipes</span>
+                                    </a>/
+                                    <a href="https://briansayre.com/mathle" target="_blank">
+                                        <span>Mathle</span>
+                                    </a>/
+                                    <a href="https://simplmeals-1561736691951.web.app/" target="_blank">
+                                        <span>Simplmeals</span>
+                                    </a>/
+                                    <a href="https://nflscorigami.com/" target="_blank">
+                                        <span>NFL Scorigami</span>
+                                    </a>
+                                </p>
+                                <h6>Other</h6>
+                                <p>
+                                    <a href="https://github.com/briansayre/resume/blob/master/resume.pdf"
+                                        target="_blank">
+                                        <span>Resume</span>
+                                    </a> /
+                                    <a href="https://www.buymeacoffee.com/briansayre" target="_blank">
+                                        <span>Buy me a coffee</span>
+                                    </a>
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="canvas"></div>
-    </body>
+    </div>
+</body>
+
 </html>
