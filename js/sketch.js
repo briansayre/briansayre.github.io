@@ -23,7 +23,7 @@ function windowResized() {
 function setup() {
     ROWS = Math.ceil(windowHeight / CELL_SIZE);
     COLS = Math.ceil(windowWidth / CELL_SIZE);
-    BG_COLOR = color(54, 54, 54);
+    BG_COLOR = color(34, 34, 34);
     CELL_COLOR = color(10, 10, 10, 20);
 
     var canvas = createCanvas(windowWidth, windowHeight);
