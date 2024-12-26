@@ -24,7 +24,7 @@ function setup() {
     ROWS = Math.ceil(windowHeight / CELL_SIZE);
     COLS = Math.ceil(windowWidth / CELL_SIZE);
     BG_COLOR = color(17, 17, 17);
-    CELL_COLOR = color(100, 100, 100, 10);
+    CELL_COLOR = color(100, 100, 100, 12);
 
     var canvas = createCanvas(windowWidth, windowHeight);
     canvas.position(0, 0);
