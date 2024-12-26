@@ -1,36 +1,19 @@
 body,
 html {
-    margin: 0;
-    padding: 0;
-    background-color: #222222;
-    overflow-y: hidden;
-    overflow-x: hidden;
+    background-color: #111111;
 }
 
 .columns {
-    min-height: 100vh;
-    max-height: 100vh;
+    min-height: 100dvh;
+    max-height: 100dvh;
+    /* min-height: 100vh; */
+    /* max-height: 100vh; */
 }
 
 .card {
     z-index: 1;
 }
 
-.button {
-    transition: 0.3s ease-in-out 0s;
-}
-
-.button:hover {
-    cursor: pointer;
-    transform: scale(1.05);
-    background: #fff;
-}
-
 #profile-pic {
     border-radius: 0.25rem;
-    transition: 0.3s ease-in-out 0s;
-}
-
-#profile-pic:hover {
-    transform: scale(1.05);
 }
