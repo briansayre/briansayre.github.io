@@ -3,9 +3,7 @@ var COLS = 0;
 var CELL_SIZE = 15;
 var BG_COLOR;
 var CELL_COLOR;
-var PREV_CELL_COLOR;
 var cells = [];
-var prevCells = [];
 var canvas;
 var leftPressed = false;
 
@@ -31,7 +29,6 @@ function setup() {
 
     frameRate(5);
     strokeWeight(0);
-    background(BG_COLOR);
 
     for (var i = 0; i < ROWS; i++) {
         cells[i] = [];
@@ -39,22 +36,13 @@ function setup() {
             cells[i][j] = int(random(0, 5)) == 0;
         }
     }
-
-    fill(CELL_COLOR);
-    for (var i = 0; i < ROWS; i++) {
-        for (var j = 0; j < COLS; j++) {
-            if (cells[i][j] == 1) renderCell(j, i);
-        }
-    }
 }
 
 function draw() {
     if (leftPressed) {
         leftPressed = false;
-        setup();
     }
-    clear();
-    background(BG_COLOR);
+    
     var newCells = [];
     for (var i = 0; i < ROWS; i++) {
         newCells[i] = [];
@@ -62,7 +50,10 @@ function draw() {
             newCells[i][j] = stepGameOfLife(j, i);
         }
     }
-    prevCells = cells;
+    
+    clear();
+    background(BG_COLOR);
+    
     cells = newCells;
     for (var i = 0; i < ROWS; i++) {
         for (var j = 0; j < COLS; j++) {
