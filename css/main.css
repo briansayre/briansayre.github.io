@@ -1,25 +1,25 @@
 body,
 html {
-    background-color: #111111 !important;
-    width: 100vw !important;
-    height: 100vh !important;
-    overflow: hidden !important;
-    -ms-overflow-style: none !important;
-    scrollbar-width: none !important;
+    background-color: #111111;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 .columns {
-    height: 100vh !important;
+    height: 100vh;
 }
 
 @supports (height: 100dvh) {
     body,
     html {
-        width: 100dvw !important;
-        height: 100dvh !important;
+        width: 100dvw;
+        height: 100dvh;
     }
     .columns {
-        height: 100dvh !important;
+        height: 100dvh;
     }
 }
 
