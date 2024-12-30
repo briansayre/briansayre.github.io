@@ -16,7 +16,7 @@ html {
     body,
     html {
         width: 100dvw;
-        height: 100vh;
+        height: 100dvh;
     }
     .columns {
         height: 100dvh;
