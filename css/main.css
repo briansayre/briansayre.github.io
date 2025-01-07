@@ -25,8 +25,14 @@ html {
 
 .card {
     z-index: 1;
+    transition: 0.3s ease-in-out 0s;
 }
 
-#profile-pic {
-    border-radius: 0.25rem;
+.card:hover {
+    transform: scale(1.01);
+}
+
+
+.curved {
+    border-radius: 28px;
 }
