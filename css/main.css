@@ -1,6 +1,6 @@
 body,
 html {
-    background-color: #111111;
+    background-color: #EDEDED;
     width: 100vw;
     height: 100vh;
     overflow: hidden;
@@ -29,7 +29,7 @@ html {
 }
 
 .card:hover {
-    transform: scale(1.01);
+    transform: scale(1.02);
 }
 
 
