@@ -12,6 +12,10 @@ html {
     height: 100vh;
 }
 
+img {
+    object-fit: cover;
+}
+
 @supports (height: 100dvh) {
     body,
     html {
@@ -25,14 +29,8 @@ html {
 
 .card {
     z-index: 1;
-    transition: 0.3s ease-in-out 0s;
 }
-
-.card:hover {
-    transform: scale(1.02);
-}
-
 
 .curved {
-    border-radius: 28px;
+    /* border-radius: 28px; */
 }
