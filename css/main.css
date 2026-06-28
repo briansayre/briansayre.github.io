@@ -1,36 +1,192 @@
-body,
-html {
-    background-color: rgb(242, 242, 244);
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+:root {
+    --bg: rgb(242, 242, 244);
+    --term-bg: rgba(251, 251, 253, 0.82);
+    --bar-bg: rgba(236, 237, 241, 0.85);
+    --term-shadow: 0 24px 60px rgba(20, 20, 50, 0.12);
+    --ink: #25252c;
+    --muted: #8a8a95;
+    --prompt: #1f9d55;
+    --accent: #2b59ff;
+    --line: #e2e2e9;
+    --row-hover: rgba(43, 89, 255, 0.06);
+    --row-active: rgba(43, 89, 255, 0.1);
+    /* Read by js/gol.js so the animation follows the theme */
+    --gol-bg: rgb(242, 242, 244);
+    --gol-cell: rgba(204, 200, 200, 0.164);
 }
-
-.columns {
-    height: 100vh;
+[data-theme="dark"] {
+    --bg: #15151a;
+    --term-bg: rgba(28, 28, 35, 0.82);
+    --bar-bg: rgba(38, 38, 47, 0.9);
+    --term-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+    --ink: #e7e7ec;
+    --muted: #9a9aa6;
+    --prompt: #3ddc84;
+    --accent: #82a4ff;
+    --line: #34343f;
+    --row-hover: rgba(130, 164, 255, 0.12);
+    --row-active: rgba(130, 164, 255, 0.18);
+    --gol-bg: #15151a;
+    --gol-cell: rgba(107, 121, 163, 0.045);
 }
-
-img {
-    object-fit: cover;
+* { box-sizing: border-box; }
+html { background: var(--bg); }
+html, body {
+    margin: 0;
+    color: var(--ink);
+    font-family: ui-monospace, "Cascadia Code", "SF Mono", "Consolas", "Liberation Mono", monospace;
+    -webkit-font-smoothing: antialiased;
 }
-
-@supports (height: 100dvh) {
-    body,
-    html {
-        width: 100dvw;
-        height: 100dvh;
-    }
-    .columns {
-        height: 100dvh;
-    }
+/* Transparent so the canvas (z-index 0) shows through the margins */
+body { background: transparent; }
+/* Smooth fade when switching themes */
+html, body, .term, .bar, .bar *, .body, .body * {
+    transition: background-color 0.25s ease, color 0.25s ease,
+        border-color 0.25s ease, box-shadow 0.25s ease;
 }
-
-.card {
+.stage {
+    position: relative;
     z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    /* Let clicks/drags on the empty margins reach the Game of Life canvas */
+    pointer-events: none;
+}
+@supports (height: 100dvh) { .stage { min-height: 100dvh; } }
+
+.term {
+    width: 100%;
+    max-width: 680px;
+    /* Re-enable pointer events for the window itself (links, toggle) */
+    pointer-events: auto;
+    /* Translucent so the Game of Life softly ghosts through, behind the text */
+    background: var(--term-bg);
+    backdrop-filter: blur(10px) saturate(120%);
+    -webkit-backdrop-filter: blur(10px) saturate(120%);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: var(--term-shadow);
+    overflow: hidden;
+}
+/* Gently fade the cells out toward the edges for a calmer, ambient feel,
+   plus a soft blur so cells read as gentle blobs rather than crisp pixels */
+canvas {
+    filter: blur(1.4px);
+    -webkit-mask-image: radial-gradient(130% 115% at 50% 45%, #000 60%, transparent 100%);
+    mask-image: radial-gradient(130% 115% at 50% 45%, #000 60%, transparent 100%);
+}
+.bar {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 0.9rem;
+    background: var(--bar-bg);
+    border-bottom: 1px solid var(--line);
+}
+.dot { width: 12px; height: 12px; border-radius: 50%; }
+.dot.r { background: #ff5f57; }
+.dot.y { background: #febc2e; }
+.dot.g { background: #28c840; }
+.bar .file { margin-left: auto; color: var(--muted); font-size: 0.8rem; }
+.theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 0.2rem;
+    border-radius: 6px;
+    transition: color 0.15s ease, background 0.15s ease;
+}
+.theme-toggle:hover { color: var(--ink); background: var(--row-hover); }
+.theme-toggle svg { width: 16px; height: 16px; fill: currentColor; }
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: block; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+
+.body { padding: 1.4rem 1.5rem 1.7rem; font-size: 0.95rem; line-height: 1.65; }
+.prompt { color: var(--prompt); }
+.prompt::before { content: "~/portfolio$ "; color: var(--muted); }
+.out { color: var(--ink); }
+/* Consistent rhythm: each command has the same top margin; outputs have none */
+.cmd { margin-top: 1.2rem; }
+.cmd:first-child { margin-top: 0; }
+h1.name { display: inline; font: inherit; margin: 0; }
+
+.ls { margin: 0; }
+.ls .total { color: var(--muted); }
+.ls a {
+    display: grid;
+    grid-template-columns: 17ch minmax(0, 1fr);
+    column-gap: 1.4ch;
+    align-items: baseline;
+    text-decoration: none;
+    color: var(--ink);
+    padding: 0 0.4rem;
+    margin: 0 -0.4rem;
+    border-radius: 6px;
+    transition: background 0.12s ease;
+}
+.ls a:hover { background: var(--row-hover); }
+.ls .dir { color: var(--accent); }
+.ls a:hover .dir { text-decoration: underline; }
+.ls .desc, .ls .desc-sm { color: var(--muted); }
+.ls .desc { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ls .desc-sm { display: none; }
+
+.contact { display: flex; flex-wrap: wrap; gap: 1.25rem; margin: 0; }
+.contact a { color: var(--accent); text-decoration: none; }
+.contact a:hover { text-decoration: underline; }
+
+.cursor {
+    display: inline-block;
+    width: 9px; height: 1.1em;
+    background: var(--ink);
+    vertical-align: text-bottom;
+    animation: blink 1.1s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* Boot typing animation: fade groups in as they're revealed by js/terminal.js.
+   Hiding is gated on .js-boot (added by an inline head script when JS is on),
+   so no-JS users still see the full page. */
+.cmd, .out, .ls, .contact {
+    transition: opacity 0.3s ease, background-color 0.25s ease, color 0.25s ease,
+        border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.js-boot .cmd,
+.js-boot .out,
+.js-boot .ls,
+.js-boot .contact { opacity: 0; }
+.js-boot .is-shown { opacity: 1; }
+/* Solid cursor on the line that is currently being typed */
+.cmd.typing .prompt::after {
+    content: "";
+    display: inline-block;
+    width: 9px;
+    height: 1.1em;
+    margin-left: 2px;
+    background: var(--ink);
+    vertical-align: text-bottom;
 }
 
-.curved {
-    /* border-radius: 28px; */
+/* Mobile polish */
+body { -webkit-tap-highlight-color: transparent; }
+.ls a:active { background: var(--row-active); }
+.contact a:active { color: var(--accent); }
+@media (max-width: 600px) {
+    /* Swap in the short descriptions so every row stays a single line */
+    .ls a { padding: 0 0.4rem; }
+    .ls .desc { display: none; }
+    .ls .desc-sm { display: block; white-space: nowrap; font-size: 0.85rem; }
+}
+@media (max-width: 480px) {
+    .stage { padding: 1rem; }
+    .body { padding: 1.2rem 1.1rem 1.4rem; font-size: 0.88rem; }
 }

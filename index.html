@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="m-0">
+<html lang="en">
   <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script
@@ -19,13 +19,31 @@
     <meta name="description" content="Brian Sayre's personal website." />
     <meta name="keywords" content="Brian, Sayre" />
     <meta name="author" content="Brian Sayre" />
-    <meta name="theme-color" content="#F5F5F7" />
+    <meta name="theme-color" content="#F2F2F4" />
     <title>Brian Sayre</title>
-    <link rel="stylesheet" href="css/all.min.css" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    />
+    <!-- Set the theme before first paint to avoid a flash -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("theme");
+          var theme =
+            saved ||
+            (window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light");
+          document.documentElement.setAttribute("data-theme", theme);
+        } catch (e) {}
+      })();
+    </script>
+    <!-- Enable the boot/typing animation (set before paint to avoid a flash) -->
+    <script>
+      (function () {
+        try {
+          document.documentElement.classList.add("js-boot");
+        } catch (e) {}
+      })();
+    </script>
     <link rel="stylesheet" href="css/main.css" />
     <link
       rel="apple-touch-icon"
@@ -45,119 +63,115 @@
       href="./favicon/favicon-16x16.png"
     />
     <link rel="manifest" href="./favicon/site.webmanifest" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.min.js"></script>
-    <script src="./js/sketch.js"></script>
+    <script>
+      // Colors come from the --gol-bg / --gol-cell CSS variables (theme-aware)
+      window.GOL_CONFIG = { cellSize: 14, fps: 3, fadeMs: 75, zIndex: 0, interactive: true };
+    </script>
+    <script src="js/gol.js"></script>
   </head>
 
-  <body class="m-0">
-    <div class="container has-text-dark">
-      <div class="columns is-vcentered is-mobile is-centered">
-        <div
-          class="column is-10-mobile is-10-tablet is-8-desktop is-5-widescreen"
-        >
-          <div class="card curved is-shadowless">
-            <div class="card-image">
-              <figure class="image is-3by1 curved">
-                <img
-                    src="https://avatars.githubusercontent.com/u/19983462?v=4"
-                  alt="Placeholder image"
-                />
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="media">
-                <!-- <div class="media-left">
-                  <figure class="image is-48x48">
-                    <img
-                      class="is-rounded"
-                      id="profile-pic"
-                      src="https://avatars.githubusercontent.com/u/19983462?v=4"
-                    />
-                  </figure>
-                </div> -->
-                <div class="media-content">
-                  <p class="title is-4">Brian Sayre</p>
-                  <p class="subtitle is-6">Software Developer</p>
-                </div>
-              </div>
-
-              <div class="content">
-                <h6>Projects</h6>
-                <p>
-                  <a href="https://briansayre.com/scores" target="_blank">
-                    <span>Football Scores</span> </a
-                  >/
-                  <a href="https://scorigami.live/" target="_blank">
-                    <span>NFL Scorigami</span>
-                  </a>
-                  <a href="https://x.com/ScorigamiGuy" target="_blank">
-                    <span>+ X Bot</span>
-                  </a>
-                  <a
-                    href="https://bsky.app/profile/scorigami.live"
-                    target="_blank"
-                  >
-                    <span>+ Bsky Bot</span> </a
-                  >/
-                  <a href="https://briansayre.com/recipes" target="_blank">
-                    <span>Recipes</span> </a
-                  >/
-                  <a href="https://briansayre.com/mathle" target="_blank">
-                    <span>Mathle</span> </a
-                  >/
-                  <a
-                    href="https://simplmeals-1561736691951.web.app/"
-                    target="_blank"
-                  >
-                    <span>Simplmeals</span>
-                  </a>
-                </p>
-              </div>
-            </div>
-            <footer class="card-footer">
-              <a
-                class="card-footer-item"
-                href="https://github.com/briansayre"
-                target="_blank"
-                title="GitHub"
-              >
-                <span class="icon">
-                  <i class="fab fa-github"></i>
-                </span>
-              </a>
-              <a
-                class="card-footer-item"
-                href="https://www.linkedin.com/in/brian-sayre"
-                title="LinkedIn"
-                target="_blank"
-              >
-                <span class="icon">
-                  <i class="fab fa-linkedin-in"></i>
-                </span> </a
-              ><a
-                class="card-footer-item"
-                href="https://www.buymeacoffee.com/briansayre"
-                title="Buy me a coffee"
-                target="_blank"
-              >
-                <span class="icon">
-                  <i class="fas fa-coffee"></i>
-                </span>
-              </a><a
-                class="card-footer-item"
-                href="mailto:briansayre01@gmail.com"
-                title="Email me"
-                target="_blank"
-              >
-                <span class="icon">
-                  <i class="fas fa-envelope"></i>
-                </span>
-              </a>
-            </footer>
-          </div>
+  <body>
+    <div class="stage">
+      <section class="term">
+        <div class="bar">
+          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <span class="file">~/portfolio — zsh</span>
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            type="button"
+            aria-label="Toggle dark mode"
+            title="Toggle theme"
+          >
+            <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.39 5.39 0 0 1-4.4 2.26 5.4 5.4 0 0 1-5.4-5.4c0-1.82.9-3.43 2.27-4.4-.44-.06-.9-.1-1.37-.1z" />
+            </svg>
+            <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zM12 1a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1zm0 18a1 1 0 0 1 1 1v2a1 1 0 1 1-2 0v-2a1 1 0 0 1 1-1zM4.22 4.22a1 1 0 0 1 1.42 0l1.41 1.41a1 1 0 1 1-1.41 1.42L4.22 5.64a1 1 0 0 1 0-1.42zm12.73 12.73a1 1 0 0 1 1.41 0l1.42 1.41a1 1 0 0 1-1.42 1.42l-1.41-1.42a1 1 0 0 1 0-1.41zM1 12a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2H2a1 1 0 0 1-1-1zm18 0a1 1 0 0 1 1-1h2a1 1 0 1 1 0 2h-2a1 1 0 0 1-1-1zM4.22 19.78a1 1 0 0 1 0-1.41l1.41-1.42a1 1 0 1 1 1.42 1.42l-1.42 1.41a1 1 0 0 1-1.41 0zm12.73-12.73a1 1 0 0 1 0-1.41l1.41-1.42a1 1 0 1 1 1.42 1.42l-1.42 1.41a1 1 0 0 1-1.41 0z" />
+            </svg>
+          </button>
         </div>
-      </div>
+        <div class="body">
+          <div class="cmd"><span class="prompt">whoami</span></div>
+          <div class="out"><h1 class="name">Brian Sayre</h1> - Software Developer</div>
+
+          <div class="cmd"><span class="prompt">ls -l projects/</span></div>
+          <div class="ls">
+            <div class="total">total 7</div>
+            <a href="https://briansayre.com/scores" target="_blank" rel="noopener">
+              <span class="dir">football-scores/</span>
+              <span class="desc">Live football scores</span>
+              <span class="desc-sm">Football scores</span>
+            </a>
+            <a href="https://scorigami.live/" target="_blank" rel="noopener">
+              <span class="dir">nfl-scorigami/</span>
+              <span class="desc">Every unique NFL final score</span>
+              <span class="desc-sm">Unique NFL scores</span>
+            </a>
+            <a class="sub" href="https://x.com/ScorigamiGuy" target="_blank" rel="noopener">
+              <span class="dir">├─ x-bot</span>
+              <span class="desc">Auto-post scores to X</span>
+              <span class="desc-sm">Post scores on X</span>
+            </a>
+            <a class="sub" href="https://bsky.app/profile/scorigami.live" target="_blank" rel="noopener">
+              <span class="dir">└─ bsky-bot</span>
+              <span class="desc">…and on Bluesky</span>
+              <span class="desc-sm">…and on Bluesky</span>
+            </a>
+            <a href="https://briansayre.com/recipes" target="_blank" rel="noopener">
+              <span class="dir">recipes/</span>
+              <span class="desc">My no-frills recipe box</span>
+              <span class="desc-sm">My recipe box</span>
+            </a>
+            <a href="https://briansayre.com/mathle" target="_blank" rel="noopener">
+              <span class="dir">mathle/</span>
+              <span class="desc">A daily math twist on Wordle</span>
+              <span class="desc-sm">Daily math puzzle</span>
+            </a>
+            <a href="https://simplmeals-1561736691951.web.app/" target="_blank" rel="noopener">
+              <span class="dir">simplmeals/</span>
+              <span class="desc">Plan meals without the fuss</span>
+              <span class="desc-sm">Meal planning</span>
+            </a>
+          </div>
+
+          <div class="cmd"><span class="prompt">cat contact.txt</span></div>
+          <div class="contact out">
+            <a href="https://github.com/briansayre" target="_blank" rel="noopener">github</a>
+            <a href="https://www.linkedin.com/in/brian-sayre" target="_blank" rel="noopener">linkedin</a>
+            <a href="https://www.buymeacoffee.com/briansayre" target="_blank" rel="noopener">coffee</a>
+            <a href="mailto:briansayre01@gmail.com">email</a>
+          </div>
+
+          <div class="cmd"><span class="prompt"></span><span class="cursor"></span></div>
+        </div>
+      </section>
     </div>
+    <script>
+      (function () {
+        var btn = document.getElementById("themeToggle");
+        function sync() {
+          var dark =
+            document.documentElement.getAttribute("data-theme") === "dark";
+          btn.setAttribute(
+            "aria-label",
+            dark ? "Switch to light mode" : "Switch to dark mode"
+          );
+        }
+        sync();
+        btn.addEventListener("click", function () {
+          var dark =
+            document.documentElement.getAttribute("data-theme") === "dark";
+          var next = dark ? "light" : "dark";
+          document.documentElement.setAttribute("data-theme", next);
+          try {
+            localStorage.setItem("theme", next);
+          } catch (e) {}
+          sync();
+        });
+      })();
+    </script>
+    <script src="js/terminal.js"></script>
   </body>
 </html>
