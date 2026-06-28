@@ -125,7 +125,9 @@ canvas {
 /* Consistent rhythm: each command has the same top margin; outputs have none */
 .cmd { margin-top: 1.2rem; }
 .cmd:first-child { margin-top: 0; }
-h1.name { display: inline; font: inherit; margin: 0; }
+/* Inherits its color from .out; no own transition so it tracks the parent's
+   theme fade directly instead of lagging with a transition-of-a-transition */
+h1.name { display: inline; font: inherit; margin: 0; transition: none; }
 
 .ls { margin: 0; }
 .ls .total { color: var(--muted); }
@@ -148,9 +150,15 @@ h1.name { display: inline; font: inherit; margin: 0; }
 .ls .desc { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ls .desc-sm { display: none; }
 
-.contact { display: flex; flex-wrap: wrap; gap: 1.25rem; margin: 0; }
-.contact a { color: var(--accent); text-decoration: none; }
-.contact a:hover { text-decoration: underline; }
+.contact { display: flex; flex-wrap: wrap; gap: 0.45rem; margin: 0 -0.4rem; }
+.contact a {
+    color: var(--accent);
+    text-decoration: none;
+    padding: 0.1rem 0.4rem;
+    border-radius: 6px;
+    transition: background 0.12s ease, color 0.25s ease;
+}
+.contact a:hover { background: var(--row-hover); text-decoration: underline; }
 
 .cursor {
     display: inline-block;
@@ -189,7 +197,7 @@ h1.name { display: inline; font: inherit; margin: 0; }
 /* Mobile polish */
 body { -webkit-tap-highlight-color: transparent; }
 .ls a:active { background: var(--row-active); }
-.contact a:active { color: var(--accent); }
+.contact a:active { background: var(--row-active); }
 @media (max-width: 600px) {
     /* Right-align the title on mobile */
     .bar .file { position: static; transform: none; margin-left: auto; }
