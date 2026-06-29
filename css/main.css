@@ -107,6 +107,8 @@ canvas {
     cursor: grab;
     user-select: none;
     -webkit-user-select: none;
+    /* The bar drives its own drag gesture — don't let touch scroll/refresh it */
+    touch-action: none;
 }
 .term.dragging .bar { cursor: grabbing; }
 .dots { display: flex; align-items: center; gap: 0.5rem; }
