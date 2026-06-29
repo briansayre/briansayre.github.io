@@ -68,6 +68,26 @@ html, body, .term, .bar, .bar *, .body, .body * {
     border-radius: 20px;
     box-shadow: var(--term-shadow);
     overflow: hidden;
+    /* Drag offset (--tx/--ty set by js/window.js); transitions cover the
+       open/close/resize states (disabled mid-drag so it tracks the cursor) */
+    transform: translate(var(--tx, 0px), var(--ty, 0px));
+    transition: transform 0.3s ease, opacity 0.3s ease, max-width 0.3s ease,
+        background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+.term.dragging { transition: none; }
+.term.maximized {
+    position: fixed;
+    inset: 0;
+    max-width: none;
+    border: none;
+    border-radius: 0;
+    overflow: auto;
+    transform: none;
+}
+.term.minimized .body { display: none; }
+.term.closing {
+    opacity: 0;
+    transform: translate(var(--tx, 0px), var(--ty, 0px)) scale(0.92);
 }
 /* Gently fade the cells out toward the edges for a calmer, ambient feel,
    plus a soft blur so cells read as gentle blobs rather than crisp pixels */
@@ -84,11 +104,36 @@ canvas {
     padding: 0.7rem 0.9rem;
     background: var(--bar-bg);
     border-bottom: 1px solid var(--line);
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
 }
-.dot { width: 16px; height: 16px; border-radius: 50%; }
+.term.dragging .bar { cursor: grabbing; }
+.dots { display: flex; align-items: center; gap: 0.5rem; }
+.dot {
+    width: 16px; height: 16px;
+    border: none; border-radius: 50%;
+    padding: 0; cursor: pointer;
+    -webkit-appearance: none; appearance: none;
+    display: flex; align-items: center; justify-content: center;
+}
 .dot.r { background: #ff5f57; }
 .dot.y { background: #febc2e; }
 .dot.g { background: #28c840; }
+/* macOS-style glyphs, revealed when hovering the cluster */
+.dot::before {
+    font-size: 11px;
+    line-height: 1;
+    font-weight: 700;
+    color: rgba(0, 0, 0, 0.55);
+    opacity: 0;
+    transition: opacity 0.12s ease;
+}
+.dots:hover .dot::before,
+.dot:focus-visible::before { opacity: 1; }
+.dot.r::before { content: "\00d7"; }
+.dot.y::before { content: "\2212"; }
+.dot.g::before { content: "+"; }
 /* Centered title on desktop; right-aligned on mobile (see media query) */
 .bar .file {
     position: absolute;

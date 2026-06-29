@@ -34,7 +34,9 @@
         cr = 0, cg = 0, cb = 0, ca = 255, // cell color components
         bgStr = "",
         cellStr = "",
-        sinceStep = 0;
+        sinceStep = 0,
+        lastW = 0,
+        resizeTimer = null;
 
     // If the page defines --gol-bg / --gol-cell, follow them (lets the
     // animation react to a light/dark theme toggle). Falls back to config.
@@ -67,6 +69,26 @@
         }
     }
 
+    // Grow the grid to cover a new size WITHOUT wiping the simulation. Used for
+    // height-only resizes (e.g. a mobile browser's URL bar showing/hiding), so
+    // the board isn't reborn on every scroll jiggle.
+    function extendGrid() {
+        var newRows = Math.ceil(windowHeight / CELL_SIZE);
+        var newCols = Math.ceil(windowWidth / CELL_SIZE);
+        for (var i = 0; i < newRows; i++) {
+            if (!cells[i]) { cells[i] = []; disp[i] = []; }
+            for (var j = 0; j < newCols; j++) {
+                if (cells[i][j] === undefined) {
+                    var alive = random() < DENSITY ? 1 : 0;
+                    cells[i][j] = alive;
+                    disp[i][j] = alive;
+                }
+            }
+        }
+        ROWS = newRows;
+        COLS = newCols;
+    }
+
     window.setup = function () {
         BG_COLOR = color(bgArr[0], bgArr[1], bgArr[2]);
         var dc = color(
@@ -89,12 +111,25 @@
         refreshThemeColors();
         seed();
         sinceStep = 0;
+        lastW = windowWidth;
     };
 
     window.windowResized = function () {
-        resizeCanvas(windowWidth, windowHeight);
-        seed();
-        sinceStep = 0;
+        // Mobile browsers fire 'resize' repeatedly as the URL bar shows/hides
+        // (height changes, width stays). Debounce, and only re-seed on a real
+        // width change; for height-only changes keep the board and just cover
+        // the new area — no more reseeding on every Safari scroll/refresh tug.
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+            resizeCanvas(windowWidth, windowHeight);
+            if (windowWidth !== lastW) {
+                seed();
+                sinceStep = 0;
+            } else {
+                extendGrid();
+            }
+            lastW = windowWidth;
+        }, 150);
     };
 
     function paintAt(px, py, radius) {

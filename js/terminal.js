@@ -1,27 +1,28 @@
 // Boot/typing animation for the terminal. Drives the existing DOM
 // (.cmd / .prompt / .out / .ls / .contact) so the HTML stays the source of
-// truth. Gated on the `js-boot` class (set by an inline head script when JS is
-// on); if that class is absent we do nothing and the page shows in full.
+// truth. The `js-boot` class (set by an inline head script when JS is on) hides
+// the content before first paint; if JS is off the page shows in full.
+// Exposes window.__rebootTerminal so the red "close" button can replay it.
 (function () {
     var root = document.documentElement;
-    if (!root.classList.contains("js-boot")) return;
-
     var body = document.querySelector(".term .body");
     if (!body) {
         root.classList.remove("js-boot");
         return;
     }
 
-    // Build the boot sequence: each command line paired with its output block.
+    // Capture each command line, its text, and its output block once.
     var steps = [];
-    var cmds = Array.prototype.slice.call(body.querySelectorAll(".cmd"));
-    cmds.forEach(function (cmd) {
+    Array.prototype.slice.call(body.querySelectorAll(".cmd")).forEach(function (cmd) {
         var prompt = cmd.querySelector(".prompt");
-        var text = prompt ? prompt.textContent.trim() : "";
         var output = cmd.nextElementSibling;
         if (output && output.classList.contains("cmd")) output = null;
-        if (prompt) prompt.textContent = ""; // clear (still hidden via .js-boot)
-        steps.push({ cmd: cmd, prompt: prompt, text: text, output: output });
+        steps.push({
+            cmd: cmd,
+            prompt: prompt,
+            text: prompt ? prompt.textContent.trim() : "",
+            output: output,
+        });
     });
 
     function wait(ms) {
@@ -45,14 +46,10 @@
         });
     }
 
-    function reveal(el) {
-        if (el) el.classList.add("is-shown");
-    }
-
     async function run() {
         for (var i = 0; i < steps.length; i++) {
             var s = steps[i];
-            reveal(s.cmd); // fade the prompt line in
+            s.cmd.classList.add("is-shown");
             if (s.text) {
                 s.cmd.classList.add("typing");
                 await wait(120);
@@ -61,12 +58,24 @@
                 s.cmd.classList.remove("typing");
             }
             if (s.output) {
-                reveal(s.output);
+                s.output.classList.add("is-shown");
                 await wait(380);
             }
         }
         root.classList.remove("js-boot"); // settle into the normal state
     }
 
-    run();
+    // Re-hide everything, clear the typed text, then play the sequence again.
+    function boot() {
+        root.classList.add("js-boot");
+        steps.forEach(function (s) {
+            s.cmd.classList.remove("is-shown", "typing");
+            if (s.output) s.output.classList.remove("is-shown");
+            if (s.prompt) s.prompt.textContent = "";
+        });
+        run();
+    }
+
+    window.__rebootTerminal = boot;
+    boot();
 })();

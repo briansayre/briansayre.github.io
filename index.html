@@ -75,7 +75,11 @@
     <div class="stage">
       <section class="term">
         <div class="bar">
-          <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+          <div class="dots">
+            <button class="dot r" type="button" aria-label="Close"></button>
+            <button class="dot y" type="button" aria-label="Minimize"></button>
+            <button class="dot g" type="button" aria-label="Maximize"></button>
+          </div>
           <span class="file">brian@briansayre.com</span>
           <button
             class="theme-toggle"
@@ -173,5 +177,6 @@
       })();
     </script>
     <script src="js/terminal.js"></script>
+    <script src="js/window.js"></script>
   </body>
 </html>
