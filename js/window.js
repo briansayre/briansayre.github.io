@@ -9,14 +9,34 @@
     // Keep the mobile browser chrome (iOS status bar / toolbar) in sync: the
     // terminal color while maximized, the page background otherwise. Driving
     // the theme-color meta explicitly makes Safari revert on un-maximize.
-    var themeMeta = document.querySelector('meta[name="theme-color"]');
     function cssVar(name) {
         return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
     }
+    function toHex(c) {
+        var m = c.match(/\d+/g);
+        if (!m || m.length < 3) return c; // already hex (or unparseable) — pass through
+        return (
+            "#" +
+            m.slice(0, 3)
+                .map(function (n) {
+                    var h = (+n).toString(16);
+                    return h.length < 2 ? "0" + h : h;
+                })
+                .join("")
+        );
+    }
+    // iOS Safari re-reads theme-color far more reliably when the <meta> element
+    // is REPLACED than when its content attribute is mutated in place — so we
+    // remove and re-add it on every state change.
     function syncChromeColor() {
-        if (!themeMeta) return;
         var v = term.classList.contains("maximized") ? cssVar("--term-bg") : cssVar("--bg");
-        if (v) themeMeta.setAttribute("content", v);
+        if (!v) return;
+        var old = document.querySelector('meta[name="theme-color"]');
+        if (old && old.parentNode) old.parentNode.removeChild(old);
+        var meta = document.createElement("meta");
+        meta.setAttribute("name", "theme-color");
+        meta.setAttribute("content", toHex(v));
+        document.head.appendChild(meta);
     }
     window.__syncChromeColor = syncChromeColor;
 
