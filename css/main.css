@@ -131,7 +131,10 @@ canvas {
     opacity: 0;
     transition: opacity 0.12s ease;
 }
-.dots:hover .dot::before,
+/* Hover reveal only on real hover devices — avoids sticky glyphs on touch */
+@media (hover: hover) {
+    .dots:hover .dot::before { opacity: 1; }
+}
 .dot:focus-visible::before { opacity: 1; }
 .dot.r::before { content: "\00d7"; }
 .dot.y::before { content: "\2212"; }

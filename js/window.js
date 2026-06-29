@@ -6,6 +6,20 @@
     var bar = term && term.querySelector(".bar");
     if (!term || !bar) return;
 
+    // Keep the mobile browser chrome (iOS status bar / toolbar) in sync: the
+    // terminal color while maximized, the page background otherwise. Driving
+    // the theme-color meta explicitly makes Safari revert on un-maximize.
+    var themeMeta = document.querySelector('meta[name="theme-color"]');
+    function cssVar(name) {
+        return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+    function syncChromeColor() {
+        if (!themeMeta) return;
+        var v = term.classList.contains("maximized") ? cssVar("--term-bg") : cssVar("--bg");
+        if (v) themeMeta.setAttribute("content", v);
+    }
+    window.__syncChromeColor = syncChromeColor;
+
     // ---- Drag the window by its title bar (clamped to the viewport) ----
     var offsetX = 0,
         offsetY = 0,
@@ -93,12 +107,14 @@
     onClick(".dot.g", function () {
         term.classList.remove("minimized");
         term.classList.toggle("maximized");
+        syncChromeColor();
     });
 
     // Yellow — toggle minimized (collapse to the title bar)
     onClick(".dot.y", function () {
         term.classList.remove("maximized");
         term.classList.toggle("minimized");
+        syncChromeColor();
     });
 
     // Red — "close": shrink/fade away, then reboot with the typing animation
@@ -110,10 +126,13 @@
             offsetX = 0;
             offsetY = 0;
             setOffset(0, 0);
+            syncChromeColor();
             if (typeof window.__rebootTerminal === "function") {
                 window.__rebootTerminal();
             }
             term.classList.remove("closing");
         }, 450);
     });
+
+    syncChromeColor();
 })();

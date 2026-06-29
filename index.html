@@ -173,6 +173,7 @@
             localStorage.setItem("theme", next);
           } catch (e) {}
           sync();
+          if (window.__syncChromeColor) window.__syncChromeColor();
         });
       })();
     </script>
