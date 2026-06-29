@@ -12,7 +12,7 @@
     --row-active: rgba(43, 89, 255, 0.1);
     /* Read by js/gol.js so the animation follows the theme */
     --gol-bg: rgb(242, 242, 244);
-    --gol-cell: rgba(204, 200, 200, 0.164);
+    --gol-cell: rgba(204, 200, 200, 0.233);
 }
 [data-theme="dark"] {
     --bg: #15151a;
@@ -27,7 +27,7 @@
     --row-hover: rgba(130, 164, 255, 0.12);
     --row-active: rgba(130, 164, 255, 0.18);
     --gol-bg: #15151a;
-    --gol-cell: rgba(107, 121, 163, 0.045);
+    --gol-cell: rgba(107, 121, 163, 0.05);
 }
 * { box-sizing: border-box; }
 html { background: var(--bg); }
@@ -86,11 +86,49 @@ html, body, .term, .bar, .bar *, .body, .body * {
     overflow: auto;
     transform: none;
 }
-.term.minimized .body { display: none; }
+.term.minimized {
+    opacity: 0;
+    transform: translateY(40px) scale(0.92);
+    pointer-events: none;
+}
 .term.closing {
     opacity: 0;
     transform: translate(var(--tx, 0px), var(--ty, 0px)) scale(0.92);
 }
+/* Terminal dock icon: shown only while the window is minimized. Lives as a
+   direct child of <body> after the .stage so it isn't disabled by the stage's
+   pointer-events:none, and sits above the Game of Life canvas. */
+.dock {
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+    z-index: 2;
+    border: none;
+    padding: 0;
+    background: transparent;
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    opacity: 0;
+    transform: translateX(-50%) translateY(12px) scale(0.85);
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.28));
+}
+.dock svg { display: block; width: 52px; height: 52px; }
+/* Theme-reactive icon: mirrors the terminal's own light/dark colors */
+.dock-tile { fill: var(--term-bg); stroke: var(--line); stroke-width: 1.5; }
+.dock-prompt { stroke: var(--ink); }
+.dock-cursor { fill: var(--muted); }
+.dock-tile, .dock-prompt, .dock-cursor {
+    transition: fill 0.25s ease, stroke 0.25s ease;
+}
+.dock.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+    pointer-events: auto;
+}
+.dock.show:hover { transform: translateX(-50%) translateY(-4px) scale(1.06); }
 /* Gently fade the cells out toward the edges for a calmer, ambient feel,
    plus a soft blur so cells read as gentle blobs rather than crisp pixels */
 canvas {
@@ -128,8 +166,8 @@ canvas {
 .dot::before {
     font-size: 11px;
     line-height: 1;
-    font-weight: 700;
-    color: rgba(0, 0, 0, 0.55);
+    font-weight: 1000;
+    color: rgba(0, 0, 0, 0.3);
     opacity: 0;
     transition: opacity 0.12s ease;
 }

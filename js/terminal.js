@@ -25,17 +25,22 @@
         });
     });
 
+    // Generation token: each boot() bumps it so any still-running prior boot
+    // (its setTimeout/await chain) sees a stale id and bails — no two typing
+    // loops ever run at once, even if the user spams the red "close" button.
+    var bootId = 0;
+
     function wait(ms) {
         return new Promise(function (resolve) {
             setTimeout(resolve, ms);
         });
     }
 
-    function typeInto(prompt, text) {
+    function typeInto(prompt, text, myId) {
         return new Promise(function (resolve) {
             var i = 0;
             (function tick() {
-                if (i >= text.length) {
+                if (myId !== bootId || i >= text.length) {
                     resolve();
                     return;
                 }
@@ -46,14 +51,16 @@
         });
     }
 
-    async function run() {
+    async function run(myId) {
         for (var i = 0; i < steps.length; i++) {
+            if (myId !== bootId) return; // superseded by a newer boot()
             var s = steps[i];
             s.cmd.classList.add("is-shown");
             if (s.text) {
                 s.cmd.classList.add("typing");
                 await wait(120);
-                await typeInto(s.prompt, s.text);
+                await typeInto(s.prompt, s.text, myId);
+                if (myId !== bootId) return;
                 await wait(240);
                 s.cmd.classList.remove("typing");
             }
@@ -62,18 +69,20 @@
                 await wait(380);
             }
         }
+        if (myId !== bootId) return;
         root.classList.remove("js-boot"); // settle into the normal state
     }
 
     // Re-hide everything, clear the typed text, then play the sequence again.
     function boot() {
+        var myId = ++bootId; // invalidate any in-flight run()
         root.classList.add("js-boot");
         steps.forEach(function (s) {
             s.cmd.classList.remove("is-shown", "typing");
             if (s.output) s.output.classList.remove("is-shown");
             if (s.prompt) s.prompt.textContent = "";
         });
-        run();
+        run(myId);
     }
 
     window.__rebootTerminal = boot;

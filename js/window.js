@@ -27,7 +27,12 @@
     }
 
     function clamp(value, lo, hi) {
-        return lo > hi ? value : Math.max(lo, Math.min(hi, value));
+        // When the window is larger than the viewport on an axis the bounds
+        // invert (lo > hi); clamp to [min, max] so it can pan but never slides
+        // fully off-screen.
+        var min = Math.min(lo, hi);
+        var max = Math.max(lo, hi);
+        return Math.max(min, Math.min(max, value));
     }
 
     bar.addEventListener("pointerdown", function (e) {
@@ -71,10 +76,6 @@
         term.classList.remove("dragging");
         offsetX = lastX;
         offsetY = lastY;
-        // A click (no real movement) on a minimized window restores it.
-        if (!moved && term.classList.contains("minimized")) {
-            term.classList.remove("minimized");
-        }
     }
     bar.addEventListener("pointerup", endDrag);
     bar.addEventListener("pointercancel", endDrag);
@@ -89,16 +90,90 @@
         });
     }
 
+    // ---- FLIP: animate a geometry change that CSS can't transition ----
+    // Switching .term to position:fixed/inset:8px (maximize) or back to the
+    // centered flexbox box (restore) is not animatable by the declared
+    // transform/max-width transition, so the window snaps. FLIP records the
+    // box First, applies the mutation, measures it Last, Inverts the delta as
+    // an instant transform, then Plays by clearing the transform so the
+    // stylesheet's 0.3s transition carries it to its natural state.
+    function flip(mutate) {
+        var first = term.getBoundingClientRect();
+        mutate();
+        var last = term.getBoundingClientRect(); // forces sync layout
+        // Anchor the top-left corner — the terminal's content sits at the
+        // top-left, so growing the right and bottom edges out from there reads
+        // most naturally.
+        var dx = first.left - last.left;
+        var dy = first.top - last.top;
+        var sx = last.width === 0 ? 1 : first.width / last.width;
+        var sy = last.height === 0 ? 1 : first.height / last.height;
+        // Invert: jump back to where it visually was, with no transition.
+        term.style.transition = "none";
+        term.style.transformOrigin = "top left";
+        term.style.transform =
+            "translate(" + dx + "px, " + dy + "px) scale(" + sx + ", " + sy + ")";
+        void term.offsetWidth; // force reflow so the invert sticks
+        // Play: hand control back to the stylesheet transition + CSS state.
+        requestAnimationFrame(function () {
+            term.style.transition = "";
+            term.style.transform = "";
+        });
+        // Once the transform settles, drop the custom origin so the
+        // center-origin .closing scale isn't affected later.
+        term.addEventListener("transitionend", function onEnd(e) {
+            if (e.propertyName !== "transform") return;
+            term.style.transformOrigin = "";
+            term.removeEventListener("transitionend", onEnd);
+        });
+    }
+
     // Green — toggle maximized
     onClick(".dot.g", function () {
         term.classList.remove("minimized");
-        term.classList.toggle("maximized");
+        flip(function () {
+            // Drop any drag offset so maximize is clean and restore returns to
+            // center instead of snapping back to a previously-dragged corner.
+            offsetX = 0;
+            offsetY = 0;
+            setOffset(0, 0);
+            term.classList.toggle("maximized");
+        });
     });
 
-    // Yellow — toggle minimized (collapse to the title bar)
-    onClick(".dot.y", function () {
+    // ---- Dock icon: a Terminal.app-style tile shown while minimized ----
+    var dock = document.getElementById("dock");
+
+    function minimize() {
         term.classList.remove("maximized");
-        term.classList.toggle("minimized");
+        // Reset any drag offset so the window animates straight down on
+        // minimize and reappears centered on restore.
+        offsetX = 0;
+        offsetY = 0;
+        setOffset(0, 0);
+        term.classList.add("minimized");
+        if (dock) dock.classList.add("show");
+    }
+
+    function restore() {
+        term.classList.remove("minimized");
+        if (dock) dock.classList.remove("show");
+    }
+
+    if (dock) {
+        dock.addEventListener("click", function (e) {
+            e.stopPropagation();
+            restore();
+        });
+    }
+
+    // Yellow — minimize the whole window to the dock (toggle)
+    onClick(".dot.y", function () {
+        if (term.classList.contains("minimized")) {
+            restore();
+        } else {
+            minimize();
+        }
     });
 
     // Red — "close": shrink/fade away, then reboot with the typing animation

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(playwright-cli close-all *)",
+      "Bash(rm -f ICONlight.png ICONdark.png)",
+      "Bash(rm -rf .playwright-cli)",
+      "Bash(pkill -f \"http.server 8765\")"
+    ]
+  }
+}

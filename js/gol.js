@@ -109,6 +109,14 @@
         frameRate(30);
         strokeWeight(0);
         refreshThemeColors();
+        // Re-read colors only when the theme actually changes, rather than on
+        // every frame in draw().
+        if (typeof MutationObserver !== "undefined") {
+            new MutationObserver(refreshThemeColors).observe(document.documentElement, {
+                attributes: true,
+                attributeFilter: ["data-theme"],
+            });
+        }
         seed();
         sinceStep = 0;
         lastW = windowWidth;
@@ -174,8 +182,6 @@
     }
 
     window.draw = function () {
-        refreshThemeColors();
-
         // Advance the simulation on its own (slow) cadence.
         sinceStep += deltaTime;
         if (sinceStep >= STEP_MS) {
