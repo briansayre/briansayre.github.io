@@ -77,10 +77,12 @@ html, body, .term, .bar, .bar *, .body, .body * {
 .term.dragging { transition: none; }
 .term.maximized {
     position: fixed;
-    inset: 0;
+    /* Near-fullscreen, but a small page-background margin stays at every edge so
+       the browser's top/bottom chrome always samples the page color (iOS won't
+       reliably re-tint it otherwise) */
+    inset: 8px;
+    width: auto;
     max-width: none;
-    border: none;
-    border-radius: 0;
     overflow: auto;
     transform: none;
 }

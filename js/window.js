@@ -6,40 +6,6 @@
     var bar = term && term.querySelector(".bar");
     if (!term || !bar) return;
 
-    // Keep the mobile browser chrome (iOS status bar / toolbar) in sync: the
-    // terminal color while maximized, the page background otherwise. Driving
-    // the theme-color meta explicitly makes Safari revert on un-maximize.
-    function cssVar(name) {
-        return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-    }
-    function toHex(c) {
-        var m = c.match(/\d+/g);
-        if (!m || m.length < 3) return c; // already hex (or unparseable) — pass through
-        return (
-            "#" +
-            m.slice(0, 3)
-                .map(function (n) {
-                    var h = (+n).toString(16);
-                    return h.length < 2 ? "0" + h : h;
-                })
-                .join("")
-        );
-    }
-    // iOS Safari re-reads theme-color far more reliably when the <meta> element
-    // is REPLACED than when its content attribute is mutated in place — so we
-    // remove and re-add it on every state change.
-    function syncChromeColor() {
-        var v = term.classList.contains("maximized") ? cssVar("--term-bg") : cssVar("--bg");
-        if (!v) return;
-        var old = document.querySelector('meta[name="theme-color"]');
-        if (old && old.parentNode) old.parentNode.removeChild(old);
-        var meta = document.createElement("meta");
-        meta.setAttribute("name", "theme-color");
-        meta.setAttribute("content", toHex(v));
-        document.head.appendChild(meta);
-    }
-    window.__syncChromeColor = syncChromeColor;
-
     // ---- Drag the window by its title bar (clamped to the viewport) ----
     var offsetX = 0,
         offsetY = 0,
@@ -127,14 +93,12 @@
     onClick(".dot.g", function () {
         term.classList.remove("minimized");
         term.classList.toggle("maximized");
-        syncChromeColor();
     });
 
     // Yellow — toggle minimized (collapse to the title bar)
     onClick(".dot.y", function () {
         term.classList.remove("maximized");
         term.classList.toggle("minimized");
-        syncChromeColor();
     });
 
     // Red — "close": shrink/fade away, then reboot with the typing animation
@@ -146,13 +110,10 @@
             offsetX = 0;
             offsetY = 0;
             setOffset(0, 0);
-            syncChromeColor();
             if (typeof window.__rebootTerminal === "function") {
                 window.__rebootTerminal();
             }
             term.classList.remove("closing");
         }, 450);
     });
-
-    syncChromeColor();
 })();
